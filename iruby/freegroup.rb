@@ -96,11 +96,22 @@ class Word
   def letter_at(int) @factors[int] end
   def [](int) self.letter_at(int) end
   #---
+  def count(a_letter)
+    a_letter = Letter.new(a_letter) if a_letter.is_a? String
+    return @factors.count(a_letter)
+  end
+  #---
   def flatten
     flat_factors = @factors.flatten
     self.class.new(flat_factors)
   end
   def flatten!() @factors.flatten!; return self end
+  #---
+  def split(num)
+    raise ArgumentError unless num.is_a? Integer and num > 0
+    div = [@factors[0..num-1], @factors[num..-1]]
+    return div.map{|sub| self.class.new(sub)}
+  end     
   #---
   def show() show_parens(@factors) end 
   def show_parens(myarr)
@@ -165,5 +176,9 @@ module Group extend self
   def product(element1,element2)
     raise ArgumentError unless [element1, element2].all?{|elm| elm.is_a? Element}
     return Word.new(element1.factors, element2.factors)
+  end
+  def commutator(element1, element2)
+    raise ArgumentError unless [element1, element2].all?{|elm| elm.is_a? Element}
+    return Word.new(element1.factors, element2.factors, element1.inverse.factors, element2.inverse.factors)
   end
 end
