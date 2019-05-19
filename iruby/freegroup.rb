@@ -95,6 +95,8 @@ class Word
   def pop() @factors.pop end
   def letter_at(int) @factors[int] end
   def [](int) self.letter_at(int) end
+  def first() @factors.flatten.first end
+  def last() @factors.flatten.last end
   #---
   def count(a_letter)
     a_letter = Letter.new(a_letter) if a_letter.is_a? String
@@ -161,8 +163,16 @@ class Word
     raise ArgumentError unless anElement.is_a? Element
     pd = self.dup
     pd.factors = [pd.factors, anElement.factors]
-    #return self.class.new(self.show, anElement.show)
+    pd.factors.delete(Letter.new)
     return pd
+  end
+  def ^(idx)
+    raise ArgumentError unless (idx.is_a?(Integer) and idx >= 0)
+    power = self.dup
+    (idx-1).times do |k|
+      power *= self
+    end
+    return power
   end
   def size
     return @factors.flatten.size
