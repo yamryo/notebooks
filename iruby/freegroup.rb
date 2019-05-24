@@ -158,6 +158,15 @@ class Word
     second = letters.drop(num)
     return self.class.new(second + first)
   end
+  def cyclic_reduce
+    ww = self.dup.contract 
+    wcp = Group::Identity
+    while (wcp.size < ww.size)
+      ww.factors = wcp.factors unless wcp == Group::Identity
+      wcp = ww.cyclic_permutation.contract
+    end
+    ww
+  end
   #---
   def *(anElement)
     raise ArgumentError unless anElement.is_a? Element
