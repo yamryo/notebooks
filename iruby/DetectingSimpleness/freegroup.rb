@@ -1,7 +1,7 @@
 # coding: utf-8
-
-# # Free Group
-
+##
+##  Free Group
+##
 #------------------------------------------------------------
 module Element
   def initialize(factors = [])
@@ -154,9 +154,9 @@ class Word
   #---
   def cyclic_permutation(num=1)
     letters = @factors.flatten
-    first = letters[0, num]
-    second = letters.drop(num)
-    return self.class.new(second + first)
+    former = letters[0, num]
+    latter = letters.drop(num)
+    return self.class.new(latter + former)
   end
   def cyclic_reduce
     ww = self.dup.contract 
@@ -165,7 +165,14 @@ class Word
       ww.factors = wcp.factors unless wcp == Group::Identity
       wcp = ww.cyclic_permutation.contract
     end
-    ww
+    return ww
+  end
+  def conjugate?(aWord)
+    words = [self, aWord].map(&:cyclic_reduce)
+    flag = (0..words[0].size-1).map do |i|
+      (words[0].cyclic_permutation(i) == words[1]) ? 1 : 0
+    end.sum
+    return (flag == 1)
   end
   #---
   def *(anElement)
@@ -199,5 +206,9 @@ module Group extend self
   def commutator(element1, element2)
     raise ArgumentError unless [element1, element2].all?{|elm| elm.is_a? Element}
     return Word.new(element1.factors, element2.factors, element1.inverse.factors, element2.inverse.factors)
+  end
+  def cojugate(element1, element2)
+    raise ArgumentError unless [element1, element2].all?{|elm| elm.is_a? Element}
+    return Word.new(element2.factors, element1.factors, element2.inverse.factors)
   end
 end
