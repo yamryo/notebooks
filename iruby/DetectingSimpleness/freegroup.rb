@@ -115,7 +115,7 @@ class Word
     return div.map{|sub| self.class.new(sub)}
   end     
   #---
-  def show() show_parens(@factors) end 
+  def show() show_parens(@factors).gsub(/[()]+/, '.').gsub(/^[.]|[.]$/, '') end 
   def show_parens(myarr)
     myarr.map{|f| (f.is_a?(Array)) ? "(#{self.show_parens(f)})" : f.show }.join
   end
