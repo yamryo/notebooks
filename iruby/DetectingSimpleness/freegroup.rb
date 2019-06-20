@@ -207,7 +207,7 @@ module Group extend self
     raise ArgumentError unless [element1, element2].all?{|elm| elm.is_a? Element}
     return Word.new(element1.factors, element2.factors, element1.inverse.factors, element2.inverse.factors)
   end
-  def cojugate(element1, element2)
+  def conjugate(element1, element2)
     raise ArgumentError unless [element1, element2].all?{|elm| elm.is_a? Element}
     return Word.new(element2.factors, element1.factors, element2.inverse.factors)
   end
