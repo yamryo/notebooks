@@ -83,7 +83,7 @@ class Word
                       else
                         subarr
                       end
-                    else raise ArgumentError 
+                    else raise ArgumentError, arg.class
                     end
       end
       @factors = @factors[0] if (@factors.length == 1 and @factors[0].is_a?(Array))
@@ -134,12 +134,19 @@ class Word
   end
   #---
   def contract_once
-#     self.flatten!
-    rtn = [@factors[0]]
-    @factors.each_cons(2) do |f1, f2|
-      (f1 =~ f2 and f1 != f2) ? rtn.pop : rtn << f2
+    if @factors.size > 1
+      left = []
+      right = self.flatten.factors
+      while right.size > 1
+        left << right.shift
+        if left.last.inverse == right.first
+          left.pop
+          right.shift
+        end
+      end
+      left += right
+      @factors = (left.empty?) ? [Letter.new] : left
     end
-    @factors = (rtn.empty?) ? [Letter.new('1')] : rtn 
     return self
   end
   def contract
@@ -159,7 +166,7 @@ class Word
     return self.class.new(latter + former)
   end
   def cyclic_reduce
-    ww = self.dup.contract 
+    ww = (self.dup).contract 
     wcp = Group::Identity
     while (wcp.size < ww.size)
       ww.factors = wcp.factors unless wcp == Group::Identity
