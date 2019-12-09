@@ -176,10 +176,13 @@ class Word
   end
   def conjugate?(aWord)
     words = [self, aWord].map(&:cyclic_reduce)
-    flag = (0..words[0].size-1).map do |i|
-      (words[0].cyclic_permutation(i) == words[1]) ? 1 : 0
-    end.sum
-    return (flag == 1)
+    (0..words[0].size-1).map do |i|
+        if (words[0].cyclic_permutation(i) == words[1])
+          return true
+          break
+        end
+    end
+    return false
   end
   #---
   def *(anElement)
