@@ -20,7 +20,7 @@ class Letter
     @char == a_Letter.char
   end
   def ==(a_Letter)
-    raise ArgumentError unless a_Letter.is_a? Letter
+    raise ArgumentError, a_Letter.class unless a_Letter.is_a? Letter
     (self =~ a_Letter) && (self.inverse? == a_Letter.inverse?)
   end
   def ===(a_Letter)
@@ -37,8 +37,8 @@ class Letter
   end
   def show() self.to_s end
   #---  
-  def inverse
-    if @char == '1' then
+  def inverse(num=1)
+    if @char == '1' || num.modulo(2) == 0 then
       self.dup
     else
       self.class.new((@sign == 1) ? @char.upcase : @char)
