@@ -1,1 +1,1 @@
-# Notebooks for lecture
+# Notebooks for lectures
