@@ -1,3 +1,3 @@
 ** budge **
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/yamryo/notebooks/master?filepath=exhibition)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/yamryo/notebooks.git/master)
