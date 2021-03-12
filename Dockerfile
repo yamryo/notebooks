@@ -19,6 +19,6 @@ ENV HOME /home/${NB_USER}
 
 COPY . ${HOME}
 USER root
-RUN chwon -R ${NB_UID} ${HOME}
+RUN chown -R ${NB_UID} ${HOME}
 WORKDIR ${HOME}
 USER ${USER}
