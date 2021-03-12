@@ -1,4 +1,6 @@
-FROM python:3.7-slim
+#FROM python:3.7-slim
+FROM jupyter/scipy-notebook:cf6258237ff9
+
 # install the notebook package
 RUN pip install --no-cache --upgrade pip && \
     pip install --no-cache notebook
@@ -14,5 +16,8 @@ RUN adduser --disabled-password \
     --gecos "Default user" \
     --uid ${NB_UID} \
     ${NB_USER}
+COPY . ${HOME}
+USER root
+RUN chwon -R ${NB_UID} ${HOME}
 WORKDIR ${HOME}
 USER ${USER}
