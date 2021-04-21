@@ -1,10 +1,11 @@
 #FROM python:3.7-slim
-FROM jupyter/scipy-notebook:cf6258237ff9
+#FROM jupyter/scipy-notebook:cf6258237ff9
+FROM jupyter/datascience-notebook
 
 # install the notebook package
 RUN pip install --no-cache --upgrade pip && \
     pip install --no-cache notebook
-RUN git clone https://github.com/yamryo/notebooks.git
+##RUN git clone https://github.com/yamryo/notebooks.git
 
 # create user with a home directory
 ARG NB_USER=jovyan
