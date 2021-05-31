@@ -5,13 +5,7 @@
 
 # ## Import libraries
 
-import math
-import itertools
-import random
-
-import sympy
-sympy.init_printing()
-
+# import math
 
 # ## Classes
 
@@ -28,20 +22,15 @@ class Permutation:
             print("ArgumentError: ", image)
         self.image = image
         self.size = len(image)
-        self.repr = [list(range(self.size)),self.image]
 #-----
     def act(self,arg):
-        if not type(arg) in [list,int]:
-            raise TypeError("type(arg)={}".format(type(arg)))
         if type(arg) is int:
-            if arg in self.image:
-                return self.image[arg]
-            else:
-                return arg
-        else:
+            return self.image[arg] if arg in self.image else arg
+        elif type(arg) is list:
             try:
                 return [self.act(v) for v in arg]
             except IndexError as e: print(e)
+        else: raise TypeError("type(arg)={}".format(type(arg)))
 #-----
     def __mul__(self,aPerm):
         if not isinstance(aPerm, type(self)): raise(TypeError)
@@ -52,11 +41,12 @@ class Permutation:
         inverse_image = [self.image.index(v) for v in range(self.size)]
         return type(self)(inverse_image)
 #-----
-    def __repr__(self):
-        return "{}\n{}".format(self.repr[0],self.repr[1])
+    def two_line(self):
+        return [list(range(self.size)),self.image]
 
-    def display(self):
-        display(sympy.Matrix(self.repr))
+    def __repr__(self):
+        mat = self.two_line()
+        return "{}\n{}".format(mat[0],mat[1])
 
 
 # ### Cycle class
@@ -77,16 +67,6 @@ class Cycle(Permutation):
 
     def __repr__(self):
         return "{}".format(self.seq)
-
-    def repr_as_perm(self):
-        return "{}\n{}".format(self.repr[0],self.repr[1])
-#        super().__repr__()
-
-    def display(self, flag=False):
-        if flag:
-            super(Cycle, self).display(self)
-        else:
-            display(sympy.transpose(sympy.Matrix(self.seq)))
 
 
 # ### Transposition class
@@ -114,3 +94,7 @@ def cycle_decomp(aPerm):
         factors += [Cycle(orbit)]
         im = [v for v in im if not v in orbit]
     return factors
+
+###################
+### End of File
+###################

@@ -3,39 +3,18 @@
 
 # # Incidence Matrices for quasi-cords
 
-# ## Importing modules
-
-# In[ ]:
-
+# ## Import modules
 
 import numpy as np
-
-from plotly.offline import init_notebook_mode, iplot
-init_notebook_mode(connected=False)
-
 import plotly.graph_objects as go
-from ipywidgets import widgets
-
-from copy import copy
-import sympy
-sympy.init_printing()
-
-import itertools
-from functools import reduce
-
-from tqdm.notebook import tqdm
 
 #--- import original modules ---
-
 from Permutations import Permutation
 
 
 # ## Classes and functions
 
 # ### Code class
-
-# In[ ]:
-
 
 LABELS = ['T','L','B','R']
 
@@ -70,9 +49,6 @@ class Code(tuple):
 
 
 # ### Side class, Segment class
-
-# In[ ]:
-
 
 class Side:
     '''A side of the square'''
@@ -115,9 +91,6 @@ class Segment:
 
 
 # ### Square class
-
-# In[ ]:
-
 
 class Square:
     '''A square obtained by cut the disk with 4 points T,L,B,R along the arcs a_T, a_L, a_B, a_R'''
@@ -300,10 +273,9 @@ class Square:
         return fig
 
 
-# ### get_diagram function
+# Functions
 
-# In[ ]:
-
+### get_diagram function
 
 def get_diagram(matrix, figsize=(400,400)):
     fig = go.Figure()
@@ -369,9 +341,6 @@ def get_diagram(matrix, figsize=(400,400)):
 
 
 # ### square_random_generator function
-
-# In[ ]:
-
 
 def square_random_generator(max=10, verbose=False):
     while True:
