@@ -24,7 +24,8 @@ class Code(tuple):
     4 integers T,L,B and R have the following rule;
 
     1) T+L >= B+R
-    2) |T-L| <= B+R+1
+    2) T <= L+B+R+1
+    3) L <= T+B+R
     '''
     def __init__(self, arg):
         self.verify_code(arg)
@@ -40,10 +41,10 @@ class Code(tuple):
         br = sum(code[-2:])
         if tl < br:
             raise ValueError("T+L < B+R")
-#        elif abs(code[0] - code[1]) > br+1:
-        # T=0 の場合には、L = B+R+1 がダメ (L上に trivial arc が生じる) ので、暫定的に +1 を外している。
-        elif abs(code[0]-code[1]) > br:  
-            raise ValueError("|T-L| > B+R+1")
+        elif code[0] > code[1] + br+1:
+            raise ValueError("T > L+B+R+1")
+        elif code[1] > code[0] + br:
+            raise ValueError("L > T+B+R")
         else: 
             return True
 
@@ -348,9 +349,9 @@ def square_random_generator(max=10, verbose=False):
             code = [np.random.randint(1,max) for k in range(4)]
             sqr = Square(tuple(code))
             break
-        except ValueError:
+        except ValueError as e:
             if verbose:
-                print("Oops!")
+                print(f"Oops! [code={code}], {e}")
     return sqr
 
 ##################
