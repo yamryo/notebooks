@@ -354,6 +354,12 @@ def square_random_generator(max=10, verbose=False):
                 print(f"Oops! [code={code}], {e}")
     return sqr
 
+# ### count_number_of_components function
+
+def cc(sqr):
+    """Return the number of components of the quasi-cord associated with a given Square"""
+    return len(pm.cycle_decomp(sqr.permutation()))
+
 ##################
 ### End of File
 ##################
