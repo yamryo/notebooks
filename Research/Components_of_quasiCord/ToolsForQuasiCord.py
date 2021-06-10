@@ -9,7 +9,7 @@ import numpy as np
 import plotly.graph_objects as go
 
 #--- import original modules ---
-from Permutations import Permutation
+import Permutations as pm
 
 
 # ## Classes and functions
@@ -210,8 +210,8 @@ class Square:
                     sX += [idx[1]]
             entry.iternext()
         #---
-        sigma_O = Permutation(sO)
-        sigma_X = Permutation(sX)
+        sigma_O = pm.Permutation(sO)
+        sigma_X = pm.Permutation(sX)
         return sigma_O*(sigma_X.inverse())
 
     def graphic(self, figsize=(400, 400)):
