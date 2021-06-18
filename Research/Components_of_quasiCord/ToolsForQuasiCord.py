@@ -41,7 +41,7 @@ class Code(tuple):
         br = sum(code[-2:])
         if tl < br:
             raise ValueError("T+L < B+R")
-        elif code[0] > code[1] + br+1:
+        elif code[0] > code[1] + br + 1:
             raise ValueError("T > L+B+R+1")
         elif code[1] > code[0] + br:
             raise ValueError("L > T+B+R")
