@@ -100,13 +100,13 @@ class Square:
         '''
         Arguments
         ---------
-        code : tuple
+        code : Code
             The 4-tuple corresponding to the quasi-cord.
         '''
         #---
-        self.code = Code(arg)                 # tuple: code = (\d, \d, \d, \d)
-        self.sides = self.get_sides()         # dict: sides = {label: Side(label, num),...}
-        self.segments = self.get_segments()   # list: segments = [Segment,...]
+        self.code = arg if type(arg) is Code else Code(arg)  # Code: code = (\d, \d, \d, \d)
+        self.sides = self.get_sides()                        # dict: sides = {label: Side(label, num),...}
+        self.segments = self.get_segments()                  # list: segments = [Segment,...]
    
     def get_sides(self):
         sides_dict = {}
