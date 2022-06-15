@@ -4,7 +4,7 @@
 # # Permutations on Python
 
 # ## Import libraries
-
+import numpy as np
 # import math
 
 # ## Classes
@@ -44,6 +44,12 @@ class Permutation:
     def two_line(self):
         return [list(range(self.size)),self.image]
 
+    def matrix(self):
+        M = np.zeros((self.size,self.size), dtype=int)
+        for column in range(self.size):
+            M[self.act(column)][column] = 1
+        return M
+        
     def __repr__(self):
         mat = self.two_line()
         return "{}\n{}".format(mat[0],mat[1])

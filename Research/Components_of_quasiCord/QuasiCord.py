@@ -9,6 +9,8 @@ import numpy as np
 import plotly.graph_objects as go
 
 #--- import original modules ---
+import sys
+sys.path.append("../modules")
 import Permutations as pm
 
 
