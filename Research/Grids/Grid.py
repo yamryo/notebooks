@@ -46,7 +46,7 @@ class Grid:
                 break
         return mtx
     
-    def to_permutation(self,gmtx):
+    def restore_to_permutation(self,gmtx):
         marr = [max(row) for row in gmtx]
         img = []
         for col in np.transpose(gmtx):
@@ -79,7 +79,7 @@ class Grid:
         if gd[p][p] > 0:
             num = gd[p][p]
             gd = np.delete(np.delete(gd, p, 0), p, 1)
-            rtn = {"num": num, "grid": type(self)(self.to_permutation(gd))}
+            rtn = {"num": num, "grid": type(self)(self.restore_to_permutation(gd))}
         else:
             a_col = np.where(gd[p] > 0)[0][0]
             a = gd[p][a_col]
@@ -98,7 +98,7 @@ class Grid:
                 gd[b_row][a_col] = a
                 gd = np.delete(gd, p, 0)
                 gd = np.delete(gd, p, 1)
-            rtn = type(self)(self.to_permutation(gd))
+            rtn = type(self)(self.restore_to_permutation(gd))
         return rtn
 
 ###################
