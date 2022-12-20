@@ -46,7 +46,7 @@ class Grid:
                 break
         return mtx
     
-    def to_permutation(self,gmtx):
+    def restore_to_permutation(self,gmtx):
         marr = [max(row) for row in gmtx]
         img = []
         for col in np.transpose(gmtx):
@@ -72,32 +72,33 @@ class Grid:
             )
         else: print(hline)
 #-----
-    def transform(self):
+    def transform(self, bottom_right=False):
+        p = -1 if bottom_right else 0
+        #---
         gd = self.matrix.copy()
-        if gd[0][0] > 0:
-            num = gd[0][0]
-            gd = np.delete(np.delete(gd, 0, 0), 0, 1)
-            # print("Decompose into {} + the remaining grid".format(num))
-            rtn = {"num": num, "grid": type(self)(self.to_permutation(gd))}
+        if gd[p][p] > 0:
+            num = gd[p][p]
+            gd = np.delete(np.delete(gd, p, 0), p, 1)
+            rtn = {"num": num, "grid": type(self)(self.restore_to_permutation(gd))}
         else:
-            a_col = np.where(gd[0] > 0)[0][0]
-            a = gd[0][a_col]
-            fc = np.array([r[0] for r in gd])
-            b_row = np.where(fc > 0)[0][0]
-            b = fc[b_row]
+            a_col = np.where(gd[p] > 0)[0][0]
+            a = gd[p][a_col]
+            flc = np.array([r[p] for r in gd])
+            b_row = np.where(flc > 0)[0][0]
+            b = flc[b_row]
             if a > b:
-                gd[0][a_col] = a - b
-                gd = np.insert(gd, a_col, fc, 1)
-                gd = np.delete(gd, 0, 1)
+                gd[p][a_col] = a - b
+                gd = np.insert(gd, a_col - p, flc, 1)
+                gd = np.delete(gd, p, 1)
             elif a < b:
-                gd[b_row][0] = b - a
-                gd = np.insert(gd, b_row, gd[0], 0)
-                gd = np.delete(gd, 0, 0)
+                gd[b_row][p] = b - a
+                gd = np.insert(gd, b_row - p, gd[p], 0)
+                gd = np.delete(gd, p, 0)
             else:  # a == b  ## trans III
                 gd[b_row][a_col] = a
-                gd = np.delete(gd, 0, 0)
-                gd = np.delete(gd, 0, 1)
-            rtn = type(self)(self.to_permutation(gd))
+                gd = np.delete(gd, p, 0)
+                gd = np.delete(gd, p, 1)
+            rtn = type(self)(self.restore_to_permutation(gd))
         return rtn
 
 ###################
