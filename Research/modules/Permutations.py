@@ -24,7 +24,7 @@ class Permutation:
         self.size = len(image)
 #-----
     def act(self,arg):
-        if type(arg) is int:
+        if type(arg) is int or np.int64:
             return self.image[arg] if arg in self.image else arg
         elif type(arg) is list:
             try:
@@ -46,8 +46,10 @@ class Permutation:
 
     def matrix(self):
         M = np.zeros((self.size,self.size), dtype=int)
-        for column in range(self.size):
-            M[self.act(column)][column] = 1
+        # for column in range(self.size):
+        #     M[self.act(column)][column] = 1
+        for row in range(self.size):
+            M[row][self.act(row)] = 1
         return M
         
     def __repr__(self):
