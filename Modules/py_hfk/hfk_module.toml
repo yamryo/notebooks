@@ -1,0 +1,8 @@
+# hfk_module.toml
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hfk"
+version = "1.0"
