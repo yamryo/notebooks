@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # Permutations on Python
+# # Permutation on Python
 
 # ## Import libraries
 import numpy as np
@@ -75,7 +75,8 @@ class Cycle(Permutation):
 
     def __repr__(self):
         return "{}".format(self.seq)
-
+#---
+Perm = Permutation
 
 # ### Transposition class
 
@@ -102,7 +103,7 @@ def cycle_decomp(aPerm):
         factors += [Cycle(orbit)]
         im = [v for v in im if not v in orbit]
     return factors
-
+    
 ###################
 ### End of File
 ###################

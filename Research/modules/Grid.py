@@ -6,7 +6,7 @@
 # ## Import libraries
 import random
 import numpy as np
-import Permutations as pm
+import Permutation as pm
 # import math
 
 # ## Classes
