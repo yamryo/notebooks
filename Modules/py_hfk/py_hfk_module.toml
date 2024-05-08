@@ -4,5 +4,5 @@ requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "hfk"
+name = "py_hfk"
 version = "1.0"
