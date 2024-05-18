@@ -24,8 +24,8 @@ class Edge:
     def __str__(self):
         return f"{self.hv}{self.index}({self.xend},{self.oend})"
 
-cpplass Crossing:
-p    def __init__(self, hedge, vedge):
+class Crossing:
+    def __init__(self, hedge, vedge):
         self.hedge, self.vedge = hedge, vedge
         self.sign = self.get_sign()
         self.index = (hedge.index, vedge.index)
