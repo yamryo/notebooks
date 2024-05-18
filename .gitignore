@@ -40,3 +40,6 @@ config.rst
 */Gemfile*
 
 venv
+
+data
+.virtual_documents
