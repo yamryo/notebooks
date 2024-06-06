@@ -348,7 +348,7 @@ def get_diagram(matrix, figsize=(400,400)):
 def square_random_generator(max=10, verbose=False):
     while True:
         try:
-            code = [np.random.randint(1,max) for k in range(4)]
+            code = [np.random.randint(1,max) for _ in range(4)]
             sqr = Square(tuple(code))
             break
         except ValueError as e:
