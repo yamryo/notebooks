@@ -55,7 +55,7 @@ class TestBasics(unittest.TestCase):
 
 class TestReidemeisterMoves(unittest.TestCase):
     def setUp(self):
-        self.nw = Nanoword.generate_random_nanoword(6)
+        self.nw = Nanoword.random_generator(6)
         self.ls = [Letter("X", 'a+'), Letter("Y", 'b-'), Letter("Z", 'b+')]
         # #---
         # global random
@@ -153,7 +153,7 @@ class Test_self_linking(unittest.TestCase):
         
     def test_self_linking(self):
         ltrA = MYALPH[0]
-        expected = {'R(a)': 0, 'R(b)': -1}
+        expected = {'a': 0, 'b': -1}
         actual = self.nw.self_linking(ltrA)
         self.assertEqual(expected, actual)        
 
@@ -168,25 +168,25 @@ class Test_section(unittest.TestCase):
         
     def test_section_a_posi(self):
         mysign = Sign('a+')
-        expected = [{'R(a)': 1, 'R(b)': 0}]
+        expected = [{'a': 1, 'b': 0}]
         actual = self.nw.section(mysign)
         self.assertEqual(expected, actual)
         
     def test_section_b_nega(self):
         mysign = Sign('b-')
-        expected = [{'R(a)': 1, 'R(b)': 0}]
+        expected = [{'a': 1, 'b': 0}]
         actual = self.nw.section(mysign)
         self.assertEqual(expected, actual)        
         
     def test_section_b_posi(self):
         mysign = Sign('b+')
-        expected = [{'R(a)': 0, 'R(b)': -1},{'R(a)': 0, 'R(b)': 1}]
+        expected = [{'a': 0, 'b': -1},{'a': 0, 'b': 1}]
         actual = self.nw.section(mysign)
         self.assertEqual(expected, actual)        
         
     def test_section_a_nega(self):
         mysign = Sign('a-')
-        expected = [{'R(a)': 0, 'R(b)': -1},{'R(a)': 0, 'R(b)': 1}]
+        expected = [{'a': 0, 'b': -1},{'a': 0, 'b': 1}]
         actual = self.nw.section(mysign)
         self.assertEqual(expected, actual)
 
@@ -251,7 +251,7 @@ class Test_writhe_polynomial(unittest.TestCase):
 
 class Test_invariance(unittest.TestCase):
     def setUp(self):
-        self.nw = Nanoword.generate_random_nanoword(7)
+        self.nw = Nanoword.random_generator(7)
         self.nw_for_riii = Nanoword("EBCEABADCD",
                                     [Letter('A','b-'), Letter('B','b-'), Letter('C','a-'), Letter('D','b+'), Letter('E','b+')])
     def tearDown(self):

@@ -49,10 +49,10 @@ class Sign(str):
 class Letter:
     ALL_CHARS = [chr(i) for i in range(ord('A'), ord('Z')+1)]
 
-    def __init__(self, char: str, sign: Sign) -> None:
+    def __init__(self, char: str, sign: Sign | str) -> None:
         if type(char) is not str or not len(char) == 1: raise ValueError(f"{char} is not a letter")
         self.char = char
-        self.sign = Sign(sign)
+        self.sign = sign if isinstance(sign, Sign) else Sign(sign)
     
     def __eq__(self, other) -> bool:
         if type(other) is not type(self): raise ValueError(f"{other} is not a letter")
@@ -91,7 +91,7 @@ class Nanoword:
         return all([(self.word.count(char)==2) for char in self.word])
     #---        
     @classmethod
-    def generate_random_nanoword(cls, num_of_crossings: int = 3):
+    def random_generator(cls, num_of_crossings: int = 3):
         if num_of_crossings > 26: raise ValueError(f"{num_of_crossings} must be less than or equal to 26")
         chars = Letter.ALL_CHARS[:num_of_crossings]
         word = ''.join(random.sample(chars+chars, 2*len(chars)))
@@ -111,25 +111,27 @@ class Nanoword:
 
     def diagram(self, size: int = 400) -> go.Figure:
         fig = go.Figure()
-        fig.update_xaxes(range=[-0.2, 2.6], showgrid=False, showticklabels=False, zeroline=False)
-        fig.update_yaxes(range=[-0.2, 2.6], showgrid=False, showticklabels=False)
-        fig.update_layout(plot_bgcolor="white")
-        fig.update_layout(margin=dict(t=0, b=0, l=0, r=0))
+        w = 1.6
+        fig.update_xaxes(range=[-w, w], showgrid=False, showticklabels=False, zeroline=False)
+        fig.update_yaxes(range=[-w, w], showgrid=False, showticklabels=False)
+        fig.update_layout(plot_bgcolor="white", margin=dict(t=0, b=0, l=1.0, r=1.0))
+        # Set figure size
+        fig.update_layout(width=size, height=size)
         #-- End points of chords --
         s = int(self.size/2)
         points_data = []
         for i, c in enumerate(self.word):
-    
             points_data.append({'letter': [l for l in self.alphabet if l.char == c].pop(), 
-                                'coord': (math.cos(i*math.pi/s)+1.2, math.sin(i*math.pi/s)+1.2)})
+                                'coord': (math.cos(i*math.pi/s), math.sin(i*math.pi/s))})
         fig.add_trace(go.Scatter(
             x = [p['coord'][0] for p in points_data],
             y = [p['coord'][1] for p in points_data],
             mode="markers", marker=dict(size=8.0, color="RoyalBlue"), showlegend=False,
         ))
-        def margin(tup: tuple, ratio: float = 0.2):
-            x, y = tup
-            return (ratio*(x-1.2), ratio*(y-1.2))    
+        def margin(coord: tuple):
+            r = math.sqrt(coord[0]**2 + coord[1]**2)
+            length = 0.3 if size > 200 else 0.35
+            return tuple((v/r)*length for v in coord)
         fig.add_trace(go.Scatter(
             x = [p['coord'][0]+margin(p['coord'])[0] for p in points_data],
             y = [p['coord'][1]+margin(p['coord'])[1] for p in points_data],
@@ -140,17 +142,21 @@ class Nanoword:
         for ltr in self.alphabet:
             coords = [p['coord'] for p in points_data if p['letter'] == ltr]
             chords.append(dict(type="path",
-                              path="M {},{} Q 1.2,1.2 {},{}".format(
+                              path="M {},{} Q 0,0 {},{}".format(
                                   coords[0][0],coords[0][1],coords[1][0], coords[1][1]),
                               line_color="orange",))
         else: fig.update_layout(shapes=chords)
+        #-- The start point --
+        posi = 0.35
+        fig.add_trace(go.Scatter(
+            x = [math.cos((-posi)*math.pi/s)], y = [math.sin((-posi)*math.pi/s)],
+            mode="markers", marker=dict(size=12.0, symbol="arrow", angle=(180/s)*posi*1.1, color="LightSeaGreen"), showlegend=False,
+        ))
         #-- The big circle --
         fig.add_shape(type="circle",
                       xref="x", yref="y",
-                      x0=0.2, y0=0.2, x1=2.2, y1=2.2,
+                      x0=-1.0, y0=-1.0, x1=1.0, y1=1.0,
                       line_color="LightSeaGreen",)
-        # Set figure size
-        fig.update_layout(width=size, height=size)
         return fig
 
     #--- Building an invariant ---#
@@ -210,9 +216,9 @@ class Nanoword:
         return nn*(1-2*Sign.asterisk(ltrA.sign, ltrB.sign))
         
     def self_linking(self, ltrA: Letter) -> dict[str, int, str, int]:
-        result_dict = {'R(a)': 0, 'R(b)': 0}
+        result_dict = {'a': 0, 'b': 0}
         degree = sum([ltrB.sign.pm * self.lk(ltrA, ltrB) for ltrB in self.alphabet])
-        result_dict[f"R({ltrA.sign.gen})"] = degree
+        result_dict[f"{ltrA.sign.gen}"] = degree
         return result_dict
                     
     def section(self, sign: Sign) -> list[dict]:
@@ -220,7 +226,7 @@ class Nanoword:
         for ltr in self.alphabet:            
             if ltr.sign == sign:
                 sl = self.self_linking(ltr)
-                if not (sl['R(a)'] == 0 and sl['R(b)'] == 0):
+                if not (sl['a'] == 0 and sl['b'] == 0):
                     result_list.append(sl)
         return result_list
     
@@ -230,7 +236,7 @@ class Nanoword:
             s = Sign(label)
             sec = self.section(s)
             for r_dict in sec:
-                deg = r_dict[f"R({x})"]
+                deg = r_dict[f"{x}"]
                 new_dandc = [{'deg': deg, 'coeff': dc['coeff'] + s.pm} 
                              if dc['deg'] == deg else dc for dc in output['d&c']]
                 if new_dandc == output['d&c']:
@@ -245,8 +251,8 @@ class Nanoword:
         mstr = ''.join(f"+({dc['coeff']}){x}^{dc['deg']}" for dc in slfx['d&c'])
         return mstr[1:]
     
-    def ab_polynomials(self) -> list[str]:
-        return [self.sl_polynomial(x) for x in ['a', 'b']]
+    def ab_polynomials(self) -> tuple[str]:
+        return tuple(self.sl_polynomial(x) for x in ['a', 'b'])
     
     #--- n-writhe ---#
     def signs_on_word(self) -> list[tuple[Letter, int]]:
