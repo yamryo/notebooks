@@ -5,6 +5,7 @@
 
 import sys; sys.path.append("../modules")
 from nanoword import *
+from ReidemeisterMove import *
 
 import unittest
 from unittest.mock import patch  # For mocking and patching

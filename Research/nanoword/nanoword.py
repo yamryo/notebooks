@@ -11,6 +11,7 @@ import itertools
 from typing import Literal
 import plotly.graph_objects as go
 
+
 # # Nanoword Class and other supporting classes
 
 # ## Sign class
@@ -74,8 +75,8 @@ class Nanoword:
         alphabet <-- a list of letters
         '''
         self.word: str = word
-        self.size: int = len(word)
         self.alphabet: list[Letter] = alphabet
+        self.size: int = len(word)
         self.chars: list[str] = [l.char for l in self.alphabet]
         self.validation_check()
 
@@ -89,6 +90,11 @@ class Nanoword:
         Check the word is a Gauss word or not.
         '''
         return all([(self.word.count(char)==2) for char in self.word])
+
+    def get_full_info(self) -> list[dict[str, Letter, str, bool]]:
+        return [{'letter': [l for l in self.alphabet if l.char == c][0],
+                 'is_first': (not c in self.word[:i])}
+                for i, c in enumerate(self.word)]
     #---        
     @classmethod
     def random_generator(cls, num_of_crossings: int = 3):
@@ -120,9 +126,9 @@ class Nanoword:
         #-- End points of chords --
         s = int(self.size/2)
         points_data = []
-        for i, c in enumerate(self.word):
-            points_data.append({'letter': [l for l in self.alphabet if l.char == c].pop(), 
-                                'coord': (math.cos(i*math.pi/s), math.sin(i*math.pi/s))})
+        ltrs_arr = [d['letter'] for d in self.get_full_info()]
+        for i, ltr in enumerate(ltrs_arr):
+            points_data.append({'letter': ltr, 'coord': (math.cos(i*math.pi/s), math.sin(i*math.pi/s))})
         fig.add_trace(go.Scatter(
             x = [p['coord'][0] for p in points_data],
             y = [p['coord'][1] for p in points_data],
@@ -139,18 +145,34 @@ class Nanoword:
         ))
         #-- Chords --
         chords = []
+        arrows = []
         for ltr in self.alphabet:
             coords = [p['coord'] for p in points_data if p['letter'] == ltr]
             chords.append(dict(type="path",
                               path="M {},{} Q 0,0 {},{}".format(
                                   coords[0][0],coords[0][1],coords[1][0], coords[1][1]),
                               line_color="orange",))
-        else: fig.update_layout(shapes=chords)
+            head = coords[1] if ltr.sign.ab == 'a' else coords[0]
+            arrows.append(dict(x = head[0], #x position of arrowhead
+                     y = head[1], #y position of arrowhead
+                     showarrow=True,    
+                     xref = "x", #reference axis of arrow head coordinate_x
+                     yref = "y",#reference axis of arrow head coordinate_y 
+                     arrowcolor="orange", #color of arrow
+                     arrowsize = 1.0, #size of arrow head
+                     arrowwidth = 2, #width of arrow line
+                     ax = head[0]*0.9, #arrow tail coordinate_x 
+                     ay = head[1]*0.9, #arrow tail coordinate_y
+                     axref= "x", #reference axis of arrow tail coordinate_x 
+                     ayref= "y", #reference axis of arrow tail coordinate_y 
+                     arrowhead = 3, #annotation arrow head style, from 0 to 8
+                    ))
+        else: fig.update_layout(shapes=chords, annotations=arrows)
         #-- The start point --
         posi = 0.35
         fig.add_trace(go.Scatter(
             x = [math.cos((-posi)*math.pi/s)], y = [math.sin((-posi)*math.pi/s)],
-            mode="markers", marker=dict(size=12.0, symbol="arrow", angle=(180/s)*posi*1.1, color="LightSeaGreen"), showlegend=False,
+            mode="markers", marker=dict(size=15.0, symbol="arrow", angle=(180/s)*posi*1.1, color="LightSeaGreen"), showlegend=False,
         ))
         #-- The big circle --
         fig.add_shape(type="circle",
@@ -290,139 +312,5 @@ class Nanoword:
                 s = sum([d['c'] for d in J if not d['n'] == 0])
                 wpoly += f"+({-s})"
         return wpoly[1:]
-
-
-# ## Reidemeister moves
-
-class R:
-    Homotopy_data = {('a+', 'a+', 'a+'), ('a-', 'a-', 'a-'), ('a+', 'a+', 'a-'), ('a-', 'a-', 'a+'), ('a-', 'a+', 'a+'), ('a+', 'a-', 'a-'),
-                     ('b+', 'b+', 'b+'), ('b-', 'b-', 'b-'), ('b+', 'b+', 'b-'), ('b-', 'b-', 'b+'), ('b-', 'b+', 'b+'), ('b+', 'b-', 'b-')}
-    
-    @classmethod
-    def I(cls, nw: Nanoword, reverse: bool=False, char: str=None, letter: Letter=None, index: int=None) -> Nanoword:
-        if not reverse:
-            result = cls.__rmi(nw, char=char)
-        else:
-            result = cls.__rmi_inv(nw, letter=letter, index=index)
-        return result
-                
-    @classmethod
-    def II(cls, nw: Nanoword, reverse: bool = False, chars: list = None, letters: list = None, indices: list = None) -> Nanoword:
-        if not reverse:
-            result = cls.__rmii(nw, chars=chars)
-        else:
-            result = cls.__rmii_inv(nw, letters=letters, indices=indices)
-        return result
-    
-    @classmethod
-    def III(cls, nw:Nanoword) -> Nanoword:
-        return cls.__rmiii(nw)
-
-    #---
-    @classmethod
-    def __rmi(cls, nw: Nanoword, char: str = None):
-        result = None
-        if char:
-            new_word = nw.word.replace(char+char,'')
-            if len(new_word) < nw.size:
-                new_alphabet = [l for l in nw.alphabet if not l.char == char]
-                result = Nanoword(new_word, new_alphabet)
-        else:
-            for c in nw.chars:
-                result = cls.__rmi(nw, char=c)
-                if result:
-                    break
-        return result
         
-    @classmethod
-    def __rmi_inv(cls, nw: Nanoword, letter: str = None, index: int = None):
-        result = None
-        if letter is None:
-            remaining_chars = [c for c in Letter.ALL_CHARS if c not in nw.chars]
-            try:
-                letter = Letter(remaining_chars[0], random.sample(Sign.LABELS, k=1)[0])
-            except Exception as e:
-                print(e)
-        if index is None: 
-            index = random.randint(0, nw.size)
-        #---
-        if letter.char not in nw.chars:
-            c = letter.char
-            new_word = nw.word[:index]+c+c+nw.word[index:]
-            new_alphabet = nw.alphabet + [letter]
-            result = Nanoword(new_word, new_alphabet)
-        else:
-            raise ValueError(f"{letter.char} must not be in the alphabet of this nanoword")
-        return result        
-        
-    @classmethod
-    def __rmii(cls, nw: Nanoword, chars: str = None):
-        result = None
-        if chars:
-            if len(chars) != 2: raise ValueError(f"{chars} are not a pair of characters")
-            letters = [l for l in nw.alphabet if l.char in chars]
-            if len(letters) != 2: raise ValueError(f"{chars} are not included in the alphabet")
-            if letters[0].sign.tau() == letters[1].sign:
-                ll = ''.join(chars)
-                new_word = nw.word.replace(ll, '').replace(ll, '').replace(ll[::-1], '')
-                if len(new_word) == len(nw.word) - 4:
-                    new_alphabet = [v for v in nw.alphabet if not v in letters]
-                    result = Nanoword(new_word, new_alphabet)
-        else:
-            for succ in zip(nw.word, nw.word[1:]+nw.word[:1]):
-                if not succ[0] == succ[1]:
-                    result = cls.__rmii(nw, chars=list(succ))
-                    if result:
-                        break
-        return result
-    
-    @classmethod
-    def __rmii_inv(cls, nw: Nanoword, letters: list[Letter] = None, indices: tuple[int, int] = None):
-        result = None
-        if letters is None:
-            remaining_chars = [c for c in Letter.ALL_CHARS if c not in nw.chars]
-            try:
-                letters = [Letter(remaining_chars[0], 'a+'), Letter(remaining_chars[1], 'b-')]
-            except Exception as e:
-                print(e)
-        if indices is None: 
-            indices = sorted([random.randint(0, nw.size) for _ in range(2)])
-        #---
-        if len(letters) == 2 and ({l.char for l in letters} & set(nw.chars)) == set() and letters[0].sign.tau() == letters[1].sign:
-            succ = ''.join([l.char for l in letters])
-            succ_opposite = succ[::-1] if random.randint(0,1) == 0 else succ
-            new_word = nw.word[:indices[0]] + succ + nw.word[indices[0]:indices[1]] + succ_opposite + nw.word[indices[1]:]
-            new_alphabet = nw.alphabet + letters
-            result = Nanoword(new_word, new_alphabet)
-        else:
-            raise ValueError(f"{letters} are invalid. Must be a pair of letters that are not in the alphabet of this nanoword.")
-        return result
-
-    @classmethod
-    def __rmiii(cls, nw: Nanoword):
-        w = nw.word
-        w_ext = w + w[0]
-        rmiii_crossings = []
-        all_trios = [trio for trio in itertools.combinations(list(range(nw.size)),3) 
-                     if trio[0]+1 < trio[1] and trio[1]+1 < trio[2] and trio[2]+1 < trio[0]+nw.size]
-        for trio in all_trios:
-            three_succs = [w[trio[i]] + w_ext[trio[i]+1] for i in [0,1,2]]
-            if three_succs[0][0] == three_succs[1][0] and three_succs[1][1] == three_succs[2][1] and three_succs[2][0] == three_succs[0][1]:
-                three_chars = three_succs[0]+three_succs[1][1]
-                three_letters = [[l for l in nw.alphabet if l.char == char].pop() for char in three_chars]
-                three_signs = tuple([l.sign for l in three_letters])
-                if three_signs in R.Homotopy_data:
-                    rmiii_crossings.append(trio)
-        if rmiii_crossings:
-            trio = random.choice(rmiii_crossings)
-            s = nw.size
-            for i in trio:
-                rotated = w[i:] + w[:i]
-                fliped = rotated[:2][::-1] + rotated[2:]
-                w = fliped[s-i:] + fliped[:s-i]
-            result = Nanoword(w, nw.alphabet)
-        else:
-            result = None
-        return result
-
 ## End of File
