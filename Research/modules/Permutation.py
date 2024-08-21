@@ -24,7 +24,7 @@ class Permutation:
         self.size = len(image)
 #-----
     def act(self,arg):
-        if type(arg) is int or np.int64:
+        if type(arg) in {int, np.int64}:
             return self.image[arg] if arg in self.image else arg
         elif type(arg) is list:
             try:
@@ -60,19 +60,23 @@ class Permutation:
 # ### Cycle class
 
 class Cycle(Permutation):
-    def __init__(self, arg):
+    def __init__(self, arg, maximam = None):
         if not type(arg) is list: raise(TypeError)
         self.seq = arg
         self.len = len(arg)
+        M = max(arg)+1 if maximam is None else maximam
         image = []
-        for k in range(max(arg)+1):
+        for k in range(M):
             if k in arg:
                 ind = arg.index(k)
                 image += [arg[(ind+1)%self.len]]
             else:
                 image += [k]
         super().__init__(image)
-
+    
+    def __mul__(self, aPerm):
+        return Permutation(self.act(aPerm.image))
+    
     def __repr__(self):
         return "{}".format(self.seq)
 #---
