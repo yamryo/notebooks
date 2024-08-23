@@ -19,7 +19,7 @@ class Permutation:
         try:
             [image.index(v) for v in range(max(image)+1)]
         except:
-            print("ArgumentError: ", image)
+            print(f"ArgumentError: {image} is a wrong image")
         self.image = image
         self.size = len(image)
 #-----
@@ -60,11 +60,11 @@ class Permutation:
 # ### Cycle class
 
 class Cycle(Permutation):
-    def __init__(self, arg, maximam = None):
+    def __init__(self, arg, num_of_elements = None):
         if not type(arg) is list: raise(TypeError)
         self.seq = arg
         self.len = len(arg)
-        M = max(arg)+1 if maximam is None else maximam
+        M = max(arg)+1 if num_of_elements is None else num_of_elements
         image = []
         for k in range(M):
             if k in arg:
