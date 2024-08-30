@@ -79,6 +79,9 @@ class Cycle(Permutation):
     
     def __repr__(self):
         return "{}".format(self.seq)
+    
+    def len(self):
+        return len(self.seq)
 #---
 Perm = Permutation
 
