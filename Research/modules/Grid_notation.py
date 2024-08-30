@@ -1,16 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# # Grid notation of permutations on Python
-
-# ## Import libraries
-import random
-import numpy as np
-import Permutation as pm
-# import math
-
-# ## Classes
-
 class Grid:
     '''Grid notation of a permutation'''
     
