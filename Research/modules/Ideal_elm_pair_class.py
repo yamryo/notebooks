@@ -42,22 +42,24 @@ class ideal():
         self.char_poly = self.matrix.charpoly('t')
         try:
             self.field = NumberField(self.char_poly, names=('alpha'))
+            self.UnitGroup = UnitGroup(self.field)
+            self.root = self.field.gen()
+            self.tau = self.field.hom([1/(self.root)],self.field)
+            self.Delta = diff(self.char_poly)(self.root)/self.root
+            self.eigen_vector = self.get_ev()
+            self.generator = self.get_gen()
         except ValueError as e: #NotImplementedError as e:
             print(e, f",  Char_poly = {self.char_poly.factor()}")
-#        self.field = NumberField(self.char_poly, names=('alpha'))
-        self.UnitGroup = UnitGroup(self.field)
-        self.root = self.field.gen()
-        self.tau = self.field.hom([1/(self.root)],self.field)
-        self.Delta = diff(self.char_poly)(self.root)/self.root
-        self.eigen_vector = self.get_ev()
-        self.generator = self.get_gen()
-
+        
     def get_ev(self):
         X_K = (self.matrix).change_ring(self.field)
         rt = self.root
         evlist = X_K.eigenvectors_right()
         vec = [v[1][0] for v in evlist if v[0] == rt][0]
         if X_K*vec == rt*vec:
+            denom = vec[1].denominator()
+            if not denom == 1:
+                vec = denom*vec
             return vec
         else:
             return None
@@ -78,7 +80,7 @@ class ideal():
         else: 
             return 0
         
-    def equiv_rel(self, another_generator, rng = 10):
+    def equiv_rel(self, another_generator, rng=10):
         c = self.generator/another_generator
         flag = 0
         if c == self.tau(c):
@@ -86,7 +88,7 @@ class ideal():
             r = len(unit_gens)
             signs = sorted(list(itertools.product(range(-1,2), repeat=r)), key=functools.cmp_to_key(self._compare_tuples))
             #---
-            for ids in itertools.product(range(r+1), repeat=r):
+            for ids in itertools.product(range(rng+1), repeat=r):
                 for s in signs:
                     factors = [unit_gens[i]**(s[i]*ids[i]) for i in range(r)]
                     u = functools.reduce(lambda x,y: x*y, factors)
@@ -100,6 +102,8 @@ class ideal():
 ## Constants
 a,b,c,d,f = tuple(map(lambda l: Sp_representation(l).matrix, ['a','b','c','d','f']))
 A, B, C, D, F = (k.inverse() for k in [a,b,c,d,f])
+
+e, E = d, D
 
 J4 = Sp_representation.J4
 
