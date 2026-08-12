@@ -1,3 +1,7 @@
+import Permutation as pm
+import numpy as np
+import random
+
 class Grid:
     '''Grid notation of a permutation'''
     
