@@ -16,6 +16,7 @@ This module must be imported in a SageMath Python environment.
 """
 
 from functools import reduce
+from itertools import combinations
 
 from sage.all import (
     FreeGroup,
@@ -397,6 +398,77 @@ def wedge_action_matrix(A):
 
 
 # ---------------------------------------------------------------------------
+# L3 = Lambda^3 H
+# ---------------------------------------------------------------------------
+
+_L3_BASIS = tuple(
+    combinations(H_Z.basis(), 3)
+)
+_L3_TRIPLES = tuple(
+    combinations(range(H_Z.rank()), 3)
+)
+
+L3_Z = FreeModule(ZZ, len(_L3_BASIS))
+L3_Q = FreeModule(QQ, len(_L3_BASIS))
+
+
+class L3Element:
+    """An element of L3_Q = Lambda^3(H_Q)."""
+
+    def __init__(self, coordinates):
+        value = L3_Q(coordinates)
+        value.set_immutable()
+        self.coordinates = value
+
+    def as_vector(self):
+        return L3_Q(list(self.coordinates))
+
+    def __iter__(self):
+        return iter(self.coordinates)
+
+    def __getitem__(self, index):
+        return self.coordinates[index]
+
+    def __eq__(self, other):
+        return (
+            isinstance(other, L3Element)
+            and self.coordinates == other.coordinates
+        )
+
+    @staticmethod
+    def _basis_labels(latex_mode=False):
+        wedge_symbol = r"\wedge " if latex_mode else "∧"
+
+        return tuple(
+            wedge_symbol.join(
+                _H_BASIS_LABEL[u]
+                for u in basis_element
+            )
+            for basis_element in _L3_BASIS
+        )
+
+    def __repr__(self):
+        return _format_linear_combination(
+            self.coordinates,
+            self._basis_labels(),
+        )
+
+    def _latex_(self):
+        return _format_linear_combination(
+            self.coordinates,
+            self._basis_labels(latex_mode=True),
+            coefficient_formatter=latex,
+        )
+
+    def _repr_latex_(self):
+        return "$" + self._latex_() + "$"
+
+    def to_HomHL2(self):
+        """Return the corresponding HomHL2Element."""
+        return _L3_to_HomHL2(self)
+
+        
+# ---------------------------------------------------------------------------
 # ell_2^theta : pi -> L2
 # ---------------------------------------------------------------------------
 
@@ -508,6 +580,7 @@ class HomHL2Element:
             for X in H_Q.basis()
         )
     
+
     def transported_by(self, A):
         r"""
         Return (Lambda^2 A) self A^{-1}.
@@ -529,6 +602,16 @@ class HomHL2Element:
             * A.inverse()
         )
 
+    def as_L3(self):
+        r"""
+        Return this homomorphism as an element of Lambda^3 H_Q.
+        
+        Raise ValueError if it is not a symplectic degree-one
+        derivation, hence does not lie in Lambda^3 H_Q.
+        """
+        return _HomHL2_to_L3(self)
+
+    
     def __eq__(self, other):
         return (
             isinstance(other, HomHL2Element)
@@ -563,7 +646,9 @@ class HomHL2Element:
             return NotImplemented
 
         return type(self).from_morphism(
-            scalar * self.morphism
+            HomHL2_Q(
+                scalar * self.morphism.matrix()
+            )
         )
 
     def __mul__(self, scalar):
@@ -571,7 +656,7 @@ class HomHL2Element:
 
     def __repr__(self):
         images = ", ".join(
-            f"{_H_BASIS_LABEL[X]} -> {L2Element(image)}"
+            f"{_H_BASIS_LABEL[X]} -> {image}"
             for X, image in zip(
                 H_Z.basis(),
                 self.on_basis(),
@@ -584,7 +669,119 @@ class HomHL2Element:
 
     def _repr_latex_(self):
         return "$" + self._latex_() + "$"
-        
+
+
+def _L3_to_HomHL2(trivector):
+    r"""
+    Embed Lambda^3 H_Q into Hom(H_Q, Lambda^2 H_Q)
+    using the symplectic form J.
+    """
+    if not isinstance(trivector, L3Element):
+        trivector = L3Element(trivector)
+
+    pair_index = {
+        pair: index
+        for index, pair in enumerate(_L2_PAIRS)
+    }
+
+    columns = []
+
+    for h in H_Q.basis():
+        # pairing[s] = <h, e_s> = h^T J e_s
+        pairing = [
+            sum(
+                h[r] * J[r, s]
+                for r in range(H_Q.rank())
+            )
+            for s in range(H_Q.rank())
+        ]
+
+        image = vector(QQ, L2_Q.rank())
+
+        for coefficient, (i, j, k) in zip(
+            trivector,
+            _L3_TRIPLES,
+        ):
+            image[pair_index[(j, k)]] += (
+                coefficient * pairing[i]
+            )
+            image[pair_index[(i, k)]] -= (
+                coefficient * pairing[j]
+            )
+            image[pair_index[(i, j)]] += (
+                coefficient * pairing[k]
+            )
+
+        columns.append(image)
+
+    return HomHL2Element(
+        matrix_from_columns(columns, QQ)
+    )
+
+
+def _flatten_HomHL2(tau):
+    """Flatten a 6-by-4 column-action matrix column by column."""
+    matrix_value = tau.as_matrix()
+
+    return vector(
+        QQ,
+        [
+            matrix_value[row, column]
+            for column in range(matrix_value.ncols())
+            for row in range(matrix_value.nrows())
+        ],
+    )
+
+
+def _L3_embedding_matrix():
+    r"""
+    Return the 24-by-4 matrix of
+
+        Lambda^3 H_Q -> Hom(H_Q, Lambda^2 H_Q).
+    """
+    columns = []
+
+    for basis_vector in L3_Q.basis():
+        image = _L3_to_HomHL2(
+            L3Element(basis_vector)
+        )
+        columns.append(
+            _flatten_HomHL2(image)
+        )
+
+    return matrix_from_columns(columns, QQ)
+
+
+def _HomHL2_to_L3(tau):
+    r"""
+    Convert tau to L3Element.
+
+    Raise ValueError if tau does not lie in the image of Lambda^3 H_Q.
+    """
+    if not isinstance(tau, HomHL2Element):
+        raise TypeError(
+            "tau must be a HomHL2Element"
+        )
+
+    embedding = _L3_embedding_matrix()
+    target = _flatten_HomHL2(tau)
+
+    try:
+        coordinates = embedding.solve_right(target)
+    except ValueError as error:
+        raise ValueError(
+            "HomHL2Element does not lie in Lambda^3 H_Q"
+        ) from error
+
+    # 念のため、厳密に像に入っていることを再確認する。
+    if embedding * coordinates != target:
+        raise ValueError(
+            "HomHL2Element does not lie in Lambda^3 H_Q"
+        )
+
+    return L3Element(coordinates)
+
+
 # ---------------------------------------------------------------------------
 # N3_Q = L2_Q x H_Q with the BCH group law
 # ---------------------------------------------------------------------------
@@ -613,6 +810,7 @@ class N3Element:
             tuple(xi.coordinates) + tuple(X)
         )
         coordinates.set_immutable()
+
         self.coordinates = coordinates
 
     @classmethod
@@ -710,6 +908,7 @@ class N3Element:
     def _repr_latex_(self):
         return "$" + self._latex_() + "$"
         
+
 # ---------------------------------------------------------------------------
 # Aut(N3) represented by (tau, A)
 # ---------------------------------------------------------------------------
@@ -797,6 +996,10 @@ class AutN3Element:
             self.morphism.matrix().transpose(),
         )
 
+    def as_L3_pair(self):
+        """Return (tau, A), with tau represented as an L3Element."""
+        return self.tau.as_L3(), self.A
+    
     def __call__(self, element):
         """Apply this automorphism to an N3Element."""
         if not isinstance(element, N3Element):
@@ -900,10 +1103,12 @@ def tau1_theta(mc):
     where the columns of D are the delta_i.
     """
     images = mc.act_on_basis()
+
     A = homology_action_matrix(mc).change_ring(QQ)
     A2 = wedge_action_matrix(A)
 
     delta_columns = []
+
     for index, image in enumerate(images, start=1):
         generator_value = ELL2_GENERATOR_VALUES[index]
 
@@ -915,6 +1120,7 @@ def tau1_theta(mc):
             ell2_theta(image)
             - transported_generator_value
         )
+
         delta_columns.append(
             delta.as_vector()
         )
@@ -956,6 +1162,9 @@ __all__ = [
     "L2_Z",
     "L2_Q",
     "L2Element",
+    "L3_Z",
+    "L3_Q",
+    "L3Element",
     "wedge",
     "wedge_action_matrix",
     "ELL2_GENERATOR_VALUES",
