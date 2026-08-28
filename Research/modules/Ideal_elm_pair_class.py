@@ -7,8 +7,8 @@
 # import numpy as np
 # import math
 from sage.all import *
-import itertools
-import functools
+from itertools import product
+from functools import reduce
 
 ## Classes
 
@@ -25,15 +25,17 @@ class Sp_representation():
     J4 = block_matrix([[J, O], [O, J]])
     # J4 = J4_bm.subs([(J, evJ)]).as_explicit()
     #---
-    CHR_2_MTX = {'a': block_matrix([[L.inverse(), O], [O, I]]),
-                 'b': block_matrix([[L.T, K], [K, L.T]]),
-                 'c': block_matrix([[I, O], [O, L.inverse()]]),
-                 'd': block_matrix([[I, O], [O, L.T]]),
-                 'f': block_matrix([[L.T, O], [O,I]])}
+    CHR_2_MTX = {'a': block_matrix([[(L.T).inverse(), O], [O, I]]),
+                 'b': block_matrix([[L, K.T], [K.T, L]]),
+                 'c': block_matrix([[I, O], [O, (L.T).inverse()]]),
+                 'd': block_matrix([[I, O], [O, L]]),
+                 'f': block_matrix([[L, O], [O,I]])}
     #---
     def __init__(self, l:str):
         self.loop = l
         self.matrix = self.CHR_2_MTX.get(l) if l.islower() else self.CHR_2_MTX.get(l.lower()).inverse()
+        
+Spr=Sp_representation
 
 ### ideal class
 class ideal():

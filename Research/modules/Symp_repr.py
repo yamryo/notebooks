@@ -25,6 +25,11 @@ class Sp_representation():
     J4_bm = sp.BlockMatrix([[J, O], [O, J]])
     J4 = J4_bm.subs([(J, evJ)]).as_explicit()
     #---
+    # CHR_2_MTX = {'a': sp.BlockMatrix([[L.inv(), O], [O, I]]),
+    #              'b': sp.BlockMatrix([[L.transpose(), K], [K, L.transpose()]]),
+    #              'c': sp.BlockMatrix([[I, O], [O, L.inv()]]),
+    #              'd': sp.BlockMatrix([[I, O], [O, L.transpose()]]),
+    #              'f': sp.BlockMatrix([[L.transpose(), O], [O,I]])}
     CHR_2_MTX = {'a': sp.BlockMatrix([[L.inv(), O], [O, I]]),
                  'b': sp.BlockMatrix([[L.transpose(), K], [K, L.transpose()]]),
                  'c': sp.BlockMatrix([[I, O], [O, L.inv()]]),
