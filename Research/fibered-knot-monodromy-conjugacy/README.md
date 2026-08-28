@@ -4,7 +4,6 @@ This directory contains research notes, SageMath/Python code, Jupyter notebooks,
 
 ## Planned structure
 
-- `progress/` — research progress tree and current milestones
 - `modules/` — reusable SageMath/Python modules
 - `notebooks/` — exploratory and verification notebooks
 - `memos/` — research and implementation notes
