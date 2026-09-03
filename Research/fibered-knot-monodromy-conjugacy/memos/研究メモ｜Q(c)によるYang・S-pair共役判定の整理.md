@@ -7,7 +7,7 @@
 既存の Yang・S-pair による共役判定手順を、候補共役子
 
 $$
-Q(c)=M_AT(c)^{-1}M_B^{-1}
+Q(c)=M_BT(c)M_A^{-1}
 $$
 
 を中心に据えて整理し直す。
@@ -79,12 +79,12 @@ $$
 
 ---
 
-## 2. 候補共役子 $Q(c)$
+## 2. 候補共役子 $Q(c)$ と全 $\mathbb Q$-共役子
 
 $c\in F^\times$ に対して
 
 $$
-\boxed{Q(c):=M_AT(c)^{-1}M_B^{-1}}
+\boxed{Q(c):=M_BT(c)M_A^{-1}}
 $$
 
 と定める。
@@ -110,24 +110,86 @@ $$
 したがって
 
 $$
-M_A^{-1}AM_A=M_B^{-1}BM_B=T(\alpha).
+A=M_AT(\alpha)M_A^{-1},
+\qquad
+B=M_BT(\alpha)M_B^{-1}.
 $$
 
 さらに $T(c)$ は $T(\alpha)$ と可換するので、任意の $c\in F^\times$ に対して
 
 $$
-B=Q(c)^{-1}AQ(c)
+\boxed{B=Q(c)AQ(c)^{-1}}
 $$
 
-が $\mathbb Q$ 上で成立する。
-
-つまり Sp-共役判定は、
+が $\mathbb Q$ 上で成立する。同値な形では
 
 $$
-\boxed{Q(c)\in Sp(2g,\mathbb Z)}
+A=Q(c)^{-1}BQ(c)
 $$
 
-となる $c\in F^\times$ が存在するかを判定する問題とみなせる。
+である。
+
+### 補題：$Q(c)$ は全ての $\mathbb Q$-共役子を尽くす
+
+$$
+\boxed{
+\{Q\in GL_{2g}(\mathbb Q)\mid B=QAQ^{-1}\}
+=
+\{Q(c)\mid c\in F^\times\}.
+}
+$$
+
+実際、$B=QAQ^{-1}$ を満たす $Q\in GL_{2g}(\mathbb Q)$ を任意に取って
+
+$$
+X:=M_B^{-1}QM_A
+$$
+
+とおく。このとき $QA=BQ$ と
+
+$$
+M_A^{-1}AM_A=M_B^{-1}BM_B=T(\alpha)
+$$
+
+から
+
+$$
+XT(\alpha)=T(\alpha)X
+$$
+
+を得る。
+
+一方、$\alpha$ の最小多項式は次数 $2g$ の既約多項式 $f$ であるから、$T(\alpha)$ の $M_{2g}(\mathbb Q)$ における中心化環は
+
+$$
+C_{M_{2g}(\mathbb Q)}(T(\alpha))
+=
+\mathbb Q[T(\alpha)]
+=
+T(F)
+$$
+
+である。したがって、ある一意な $c\in F$ に対して
+
+$$
+X=T(c)
+$$
+
+となる。$X$ は可逆なので $c\ne0$、すなわち $c\in F^\times$ であり、
+
+$$
+Q=M_BXM_A^{-1}=M_BT(c)M_A^{-1}=Q(c)
+$$
+
+を得る。逆 inclusion は上で確認済みである。
+
+よって
+
+$$
+Q(c)\in Sp(2g,\mathbb Z)
+$$
+
+となる $c$ を探すことは、単なる候補族の探索ではなく、$A$ を $B$ へ移す $Sp$-共役子の全探索になっている。
 
 ---
 
@@ -151,7 +213,7 @@ $$
 
 ### 3.1 条件 (I)：整数格子条件
 
-$cv_B=M_BT(c)e$ なので、$\mathfrak a_A$ と $c\mathfrak a_B$ の係数格子は、それぞれ $M_A$ と $M_BT(c)$ の行格子で表される。
+$Q(c)v_A=M_BT(c)e=cv_B$ なので、$Q(c)$ は $v_A$ の座標格子を $cv_B$ の座標格子へ移す。
 
 したがって
 
@@ -172,13 +234,13 @@ $$
 これは、ある $U\in GL(2g,\mathbb Z)$ が存在して
 
 $$
-M_A=UM_BT(c)
+M_BT(c)=UM_A
 $$
 
 となることと同値であり、その $U$ は
 
 $$
-U=M_AT(c)^{-1}M_B^{-1}=Q(c)
+U=M_BT(c)M_A^{-1}=Q(c)
 $$
 
 である。
@@ -294,7 +356,7 @@ $$
 したがって
 
 $$
-\boxed{Q(c)=M_AT(c)^{-1}M_B^{-1}\in Sp(2g,\mathbb Z)}.
+\boxed{Q(c)=M_BT(c)M_A^{-1}\in Sp(2g,\mathbb Z)}.
 $$
 
 特に $r=1$ の場合は $u=1$ としてよい。
@@ -392,7 +454,7 @@ $$
 
 $$
 \boxed{
-Q(c_1)=M_AT(c_1)^{-1}M_B^{-1}
+Q(c_1)=M_BT(c_1)M_A^{-1}
 \stackrel{?}{\in}GL(2g,\mathbb Z)
 }
 $$
@@ -635,21 +697,33 @@ $$
 Q_*:=Q(c_*)
 $$
 
-が見つかれば、全共役子は $B$ の symplectic centralizer を用いて
+が見つかれば、全共役子は $A,B$ の symplectic centralizer を用いて
 
 $$
-Q_*\,Z_{Sp(2g,\mathbb Z)}(B)
+\boxed{
+Z_{Sp(2g,\mathbb Z)}(B)\,Q_*
+=
+Q_*\,Z_{Sp(2g,\mathbb Z)}(A)
+}
 $$
 
 と書ける。
 
-さらに $u\in S^{\times,1}$ に対して
+さらに $s\in S^{\times,1}$ に対して
 
 $$
-M_BT(u)^{-1}M_B^{-1}
+M_BT(s)M_B^{-1}
 $$
 
-は $B$ を centralize し、これにより $S^{\times,1}$ が中心化群の自由度を記述する。
+は $B$ を centralize し、
+
+$$
+Q(c_*s)
+=
+\bigl(M_BT(s)M_B^{-1}\bigr)Q_*
+$$
+
+となる。これにより $S^{\times,1}$ が中心化群の自由度を記述する。
 
 ---
 
@@ -694,7 +768,7 @@ $R\ne\mathcal O_F$ の場合の判定手順を、$Q(c)$ の言葉だけでまと
    $$
    とし、
    $$
-   Q(c_1)=M_AT(c_1)^{-1}M_B^{-1}
+   Q(c_1)=M_BT(c_1)M_A^{-1}
    $$
    が $GL(2g,\mathbb Z)$ に入るかを調べる。
 
@@ -732,7 +806,7 @@ Yang の S-pair 判定を
 
 $$
 \boxed{
-\text{候補 }Q(c)=M_AT(c)^{-1}M_B^{-1}
+\text{候補 }Q(c)=M_BT(c)M_A^{-1}
 \text{ を }Sp(2g,\mathbb Z)\text{ に落とす問題}
 }
 $$
