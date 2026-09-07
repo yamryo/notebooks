@@ -10,20 +10,14 @@
 
 に対応する研究メモ。
 
-このメモでは、Birman–Brendle–Broaddus (BBB) の「$N_3$ の正しい整数格子を保存する条件から Johnson–Morita representation の像を記述する」という考え方を採用し、
-
-- $N_2=H$ 上の共役子 $Q$ を、$ho_3(\operatorname{Aut}_{\partial}\pi)$ 内の **正しい $N_3$-lift** に持ち上げること
-- その後の残りの自由度を Johnson の定理により $\Lambda^3H_\mathbb Z$ に限定すること
-- 最後に primitive cokernel obstruction として $N_3$ 共役判定を行うこと
-
-を一つの手順として整理する。
+Birman–Brendle–Broaddus (BBB) の「$N_3$ の正しい整数格子を保存する条件から Johnson–Morita representation の像を記述する」という考え方を採用し、$N_2=H$ 上の共役子を $\rho_3(\operatorname{Aut}_{\partial}\pi)$ 内の正しい $N_3$-lift に持ち上げたうえで、Johnson obstruction を整数 cokernel class として検査する手順を整理する。
 
 旧メモ
 
 - `OLD/研究メモ｜N₃共役方程式と整数格子.md`
 - `OLD/研究メモ｜N₃共役判定とprimitive Johnson obstruction.md`
 
-は、このメモにより置き換える。
+は本メモにより置き換える。
 
 ---
 
@@ -39,44 +33,22 @@ $$
 固定した symplectic expansion $\theta$ に関する extended Johnson 成分を
 
 $$
-u_\phi:=\tau_1^\theta(\phi),\qquad
-u_\psi:=\tau_1^\theta(\psi)
+ u_\phi:=\tau_1^\theta(\phi),\qquad
+ u_\psi:=\tau_1^\theta(\psi)
 $$
 
-と書く。以下では記号を簡単にするため
-
-$$
-u_\phi=u_\phi,\qquad u_\psi=u_\psi
-$$
-
-と書き、
+と置く。したがって
 
 $$
 \rho_3(\phi)=(u_\phi,R_\phi),\qquad
-\rho_3(\psi)=(u_\psi,R_\psi)
+\rho_3(\psi)=(u_\psi,R_\psi).
 $$
 
-と表す。
-
-Morita の extended Johnson 成分は一般に
+Morita の結果から一般に
 
 $$
-u_\phi,u_\psi\in \frac12\Lambda^3H_\mathbb Z
+ u_\phi,u_\psi\in \frac12\Lambda^3H_\mathbb Z.
 $$
-
-に入る。
-
-一方、$N_3$ 上で実際に許される自己同型の像は
-
-$$
-\operatorname{Aut}_{\partial}(N_3)
-:=
-\rho_3(\operatorname{Aut}_{\partial}\pi)
-\subset
-\frac12\Lambda^3H_\mathbb Z\rtimes Sp(H_\mathbb Z)
-$$
-
-であり、ambient space 全体ではない。
 
 以下
 
@@ -86,9 +58,21 @@ $$
 
 と置く。
 
+実際に許される自己同型は ambient space 全体ではなく
+
+$$
+\operatorname{Aut}_{\partial}(N_3)
+:=
+\rho_3(\operatorname{Aut}_{\partial}\pi)
+\subset
+\frac12L\rtimes Sp(H_\mathbb Z)
+$$
+
+である。
+
 ---
 
-## 2. BBB の役割：$N_3$ の「正しい整数格子」を使う
+## 2. BBB の役割：正しい $N_3$-lift を作る
 
 symplectic expansion により $N_3$ は
 
@@ -101,15 +85,12 @@ $$
 $$
 (\xi,X)(\eta,Y)
 =
-\left(
-\xi+\eta+\frac12X\wedge Y,\,
-X+Y
-\right)
+\left(\xi+\eta+\frac12X\wedge Y,\,X+Y\right)
 $$
 
 で与えられる。
 
-重要なのは、$L_{2,\mathbb Q}\times H_\mathbb Z$ 全体が $N_3$ なのではなく、その中に $N_3$ の像として特定の整数格子
+ただし $L_{2,\mathbb Q}\times H_\mathbb Z$ 全体が $N_3$ なのではなく、その中に $N_3$ の像として特定の整数格子
 
 $$
 \mathcal N_\theta
@@ -117,7 +98,7 @@ $$
 L_{2,\mathbb Q}\times H_\mathbb Z
 $$
 
-があることである。
+がある。
 
 BBB の方法の本質は、
 
@@ -125,27 +106,25 @@ $$
 (\nu,A)\in \frac12L\rtimes Sp(H_\mathbb Z)
 $$
 
-が mapping class / $\operatorname{Aut}_{\partial}\pi$ から来るためには、この正しい整数格子 $\mathcal N_\theta$ を保存しなければならない、という条件を明示的に使うことである。
+が実際に mapping class / $\operatorname{Aut}_{\partial}\pi$ から来るためには、この正しい整数格子を保存しなければならない、という条件を使うことである。
 
-この格子保存条件から、固定した
+BBB の像記述、またはそれを現在の $\theta$-座標へ移した同値な格子保存条件から、固定した
 
 $$
 A\in Sp(H_\mathbb Z)
 $$
 
-に対して、許される Johnson part の半整数型
+に対して許される Johnson part の affine coset
 
 $$
-\nu_A\bmod L
-\in
-\frac{\frac12L}{L}
-\cong
-L/2L
+\nu_A+L
+\subset
+\frac12L
 $$
 
-が $A$ の行列成分だけから決まる。
+を $A$ から決定できる。
 
-したがって、BBB の像記述、またはそれを現在の $\theta$-座標へ移した同値な整数格子保存条件を使えば、各 $A$ に対して一つ
+したがって各 $A$ について一つ
 
 $$
 \boxed{
@@ -157,13 +136,7 @@ $$
 
 を正しく選べる。
 
-ここで「正しく」とは、単に
-
-$$
-\nu_A\in\frac12L
-$$
-
-という意味ではなく、実際に
+ここで「正しく」とは、単に $\nu_A\in\frac12L$ という意味ではなく、実際に
 
 $$
 (\nu_A,A)\in\rho_3(\operatorname{Aut}_{\partial}\pi)
@@ -175,17 +148,7 @@ $$
 
 ## 3. Johnson の定理が与える残りの自由度
 
-固定した $A\in Sp(H_\mathbb Z)$ に対して正しい lift を一つ
-
-$$
-(\nu_A,A)
-\in
-\operatorname{Aut}_{\partial}(N_3)
-$$
-
-取ったとする。
-
-同じ $A$ を $H$-部分にもつ二つの正しい lift の差は Torelli 群から来る。
+固定した $A$ に対し、正しい lift $(\nu_A,A)$ を一つ選んだとする。
 
 Johnson の定理
 
@@ -193,7 +156,7 @@ $$
 \tau_1(\mathcal I_{g,1})=\Lambda^3H_\mathbb Z=L
 $$
 
-により、同じ $A$ の上にある正しい lift はちょうど
+により、同じ $A$ を $H$-部分にもつ全ての正しい lift はちょうど
 
 $$
 \boxed{
@@ -203,9 +166,9 @@ $$
 
 を走る。
 
-したがって、正しい基準 lift を一つ確保した後には、残りの自由度は ambient space の $\frac12L$ ではなく、**exactly $L$** である。
+したがって、正しい基準 lift を一つ確保した後の残りの自由度は、ambient space の $\frac12L$ ではなく **exactly $L$** である。
 
-この事実が、後で整数 cokernel obstruction を作れる理由である。
+これが整数 cokernel obstruction を使える理由である。
 
 ---
 
@@ -219,7 +182,7 @@ $$
 
 を満たすとする。
 
-BBB 型の整数格子保存条件から、$Q$ の正しい $N_3$-lift を一つ
+BBB 型の格子保存条件から、$Q$ の正しい $N_3$-lift を一つ
 
 $$
 (\nu_Q,Q)
@@ -227,15 +190,13 @@ $$
 \operatorname{Aut}_{\partial}(N_3)
 $$
 
-取る。
+選ぶ。
 
-同じ $Q$ を $H$-部分にもつ全ての正しい lift は
+同じ $Q$ を $H$-部分にもつ全 lift は
 
 $$
-(\nu_Q+w,Q),\qquad w\in L
+(\nu_Q+w,Q),\qquad w\in L.
 $$
-
-である。
 
 半直積の積を
 
@@ -257,13 +218,7 @@ $$
 
 である。
 
-したがって
-
-$$
-(\nu_Q+w,Q)
-$$
-
-が $N_3$-共役子になる条件は
+したがって $(\nu_Q+w,Q)$ が $N_3$-共役子になる条件は
 
 $$
  u_\psi
@@ -272,17 +227,19 @@ Q\cdot u_\phi
 +(1-R_\psi\cdot)(\nu_Q+w).
 $$
 
-よって
+そこで
 
 $$
+\boxed{
 D_Q
 :=
-u_\psi
+ u_\psi
 -Q\cdot u_\phi
 -(1-R_\psi\cdot)\nu_Q
+}
 $$
 
-と置けば、必要十分条件は
+と置くと、fixed-$Q$ の必要十分条件は
 
 $$
 \boxed{
@@ -294,25 +251,19 @@ D_Q\in
 }
 $$
 
-### 重要：$D_Q$ は整数格子に入る
+### 正しい lift を使うことの決定的な効果
 
-$\nu_Q$ を「正しい lift」として選んでいるため、
+$(\nu_Q,Q)$ を正しい lift として選んでいるので
 
 $$
-D_Q\in L
+\boxed{D_Q\in L}
 $$
 
 が自動的に保証される。
 
-実際、
+実際、$(\nu_Q,Q)\rho_3(\phi)(\nu_Q,Q)^{-1}$ と $\rho_3(\psi)$ は共に $\operatorname{Aut}_{\partial}(N_3)$ に属し、$H$ 上では同じ $R_\psi$ を持つ。したがって両者の差は kernel $L$ に入る。
 
-$$
-(\nu_Q,Q)\rho_3(\phi)(\nu_Q,Q)^{-1}
-$$
-
-と $\rho_3(\psi)$ は共に $\operatorname{Aut}_{\partial}(N_3)$ に属し、$H$ 上では同じ $R_\psi$ を持つ。したがって両者の差は kernel $L$ に入る。
-
-ここが、$\nu_Q$ を単に $\frac12L$ から適当に選んだ場合との決定的な違いである。
+単に $\nu_Q\in\frac12L$ を満たすだけの ambient lift を取った場合には、この整数性は保証されない。
 
 ---
 
@@ -325,7 +276,7 @@ $$
 \qquad w_0\in L
 $$
 
-と変えると、
+と変えると
 
 $$
 D_Q
@@ -348,7 +299,7 @@ $$
 
 は正しい lift の選び方によらない。
 
-そして
+よって
 
 $$
 \boxed{
@@ -372,27 +323,18 @@ $$
 
 を integral primitive quotient とする。
 
-fibered knot の場合に用いている
-
-$$
-|f(1)|=1
-$$
-
-の条件のもとでは、$H_\mathbb Z\wedge\omega$ 成分で $1-R_\psi\cdot$ は unimodular となるため、full Johnson cokernel と primitive cokernel は同型になる。
-
-そこで
+fibered knot の場合に用いている $|f(1)|=1$ の条件のもとでは、$H_\mathbb Z\wedge\omega$ 成分で $1-R_\psi\cdot$ は unimodular なので、full Johnson cokernel は primitive quotient 上の cokernel に縮約できる。
 
 $$
 K_{\mathrm{prim}}(\psi)
 :=
 \operatorname{Coker}
 \left(
-1-R_\psi\cdot:
-P_\mathbb Z\to P_\mathbb Z
-\right)
+1-R_\psi\cdot:P_\mathbb Z\to P_\mathbb Z
+\right).
 $$
 
-と置けば、fixed-$Q$ 判定は
+したがって fixed-$Q$ 判定は
 
 $$
 \boxed{
@@ -400,7 +342,7 @@ $$
 }
 $$
 
-と書ける。
+となる。
 
 ここで重要なのは、$u_\phi,u_\psi,\nu_Q$ は個別には半整数であり得るため、
 
@@ -412,16 +354,16 @@ $$
 
 のように各項を別々に整数 cokernel class にしてはいけないことである。
 
-まず正しい lift $\nu_Q$ を用いて
+まず正しい lift を用いて
 
 $$
 D_Q
 =
-u_\psi-Q\cdot u_\phi-(1-R_\psi\cdot)\nu_Q
+ u_\psi-Q\cdot u_\phi-(1-R_\psi\cdot)\nu_Q
 \in L
 $$
 
-という整数元を作り、その後で primitive cokernel class を取る。
+を作り、その後で class を取る。
 
 ---
 
@@ -454,7 +396,7 @@ $$
 
 と書ける。
 
-$Q_0$ と $C(u)$ について、それぞれ BBB 型の条件から正しい lift
+$Q_0$ と $C(u)$ について、それぞれ正しい lift
 
 $$
 (\nu_{Q_0},Q_0),
@@ -462,9 +404,7 @@ $$
 (\nu_{C(u)},C(u))
 $$
 
-を選ぶ。
-
-積を取れば
+を選べば、その積により $Q(u)$ の正しい lift として
 
 $$
 \boxed{
@@ -474,18 +414,18 @@ $$
 }
 $$
 
-を $Q(u)$ の正しい lift の Johnson part として選べる。
+を選べる。
 
 ---
 
-## 8. $u\in S^{\times,1}$ を動かしたときの obstruction の変化
+## 8. $u\in S^{\times,1}$ を動かしたときの obstruction
 
 基準 obstruction を
 
 $$
 D(1)
 :=
-u_\psi
+ u_\psi
 -Q_0\cdot u_\phi
 -(1-R_\psi\cdot)\nu_{Q_0}
 \in L
@@ -504,12 +444,10 @@ $$
 
 と置く。
 
-$C(u)$ は $R_\phi$ と可換し、$(\nu_{C(u)},C(u))$ は正しい lift なので、
+$C(u)$ は $R_\phi$ と可換し、$(\nu_{C(u)},C(u))$ は正しい lift なので
 
 $$
-\boxed{
-E_\phi(u)\in L.
-}
+\boxed{E_\phi(u)\in L.}
 $$
 
 これは
@@ -521,9 +459,9 @@ $$
 \rho_3(\phi)^{-1}
 $$
 
-の Johnson 成分に一致する。
+の Johnson 成分である。
 
-$Q(u)=Q_0C(u)$ に対する obstruction を $D(u)$ とすると、
+$Q(u)=Q_0C(u)$ に対する obstruction を $D(u)$ とすると
 
 $$
 \boxed{
@@ -543,7 +481,7 @@ Q_0\cdot[E_\phi(u)]_{\mathrm{prim}}.
 }
 $$
 
-ここで
+ここで $Q_0$ は自然な同型
 
 $$
 Q_0:
@@ -552,22 +490,23 @@ K_{\mathrm{prim}}(\phi)
 K_{\mathrm{prim}}(\psi)
 $$
 
-が誘導する同型を用いている。
+を誘導する。
 
 ---
 
 ## 9. 最終的な $N_3$ 共役判定
 
-### 9.1 直接形
+### 直接形
 
-$Q(u)=Q_0C(u)$ に対して正しい lift $\nu_{Q(u)}$ を BBB 型の整数格子保存条件から選び、
+各 $u\in S^{\times,1}$ に対し $Q(u)=Q_0C(u)$ の正しい lift $\nu_{Q(u)}$ を取り、
 
 $$
 D(u)
 =
-u_\psi
+ u_\psi
 -Q(u)\cdot u_\phi
 -(1-R_\psi\cdot)\nu_{Q(u)}
+\in L
 $$
 
 を作る。
@@ -592,9 +531,9 @@ $$
 }
 $$
 
-### 9.2 基準障害と中心化方向の相殺として書く形
+### 基準障害と中心化方向の相殺として書く形
 
-上の式は
+同値に
 
 $$
 \boxed{
@@ -606,128 +545,43 @@ Q_0\cdot[E_\phi(u)]_{\mathrm{prim}}.
 }
 $$
 
-と同値である。
+を検査すればよい。
 
-つまり、
-
-- $[D(1)]_{\mathrm{prim}}$ は固定された基準 $N_2$-共役子 $Q_0$ の $N_3$ obstruction
-- $[E_\phi(u)]_{\mathrm{prim}}$ は中心化群方向 $C(u)$ が生む補正
-
-であり、この二つが一致する $u$ を探せばよい。
+つまり、固定された基準障害 $[D(1)]_{\mathrm{prim}}$ を、中心化群方向 $C(u)$ が生む class でちょうど相殺できるかを見る。
 
 ---
 
-## 10. 実際の判定作業
+## 10. 実際の判定手順
 
-### Step 1. $N_2$ 共役判定
+1. Yang・S-pair により $N_2=H$ 上の共役を判定し、一つの基準共役子 $Q_0$ と中心化群 $C(u)$, $u\in S^{\times,1}$ を得る。
+2. $u_\phi=\tau_1^\theta(\phi)$, $u_\psi=\tau_1^\theta(\psi)$ を計算する。
+3. BBB 型の整数格子保存条件により、$Q_0$ および必要な $C(u)$ の正しい lift $\nu_{Q_0}$, $\nu_{C(u)}$ を求める。$Q(u)$ に対して直接 $\nu_{Q(u)}$ を求めてもよい。
+4. $D(u)\in L$ を作る。
+5. $P_\mathbb Z=L/(H_\mathbb Z\wedge\omega)$ へ落とし、$[D(u)]_{\mathrm{prim}}$ を Smith normal form 等で計算する。
+6. $[D(u)]_{\mathrm{prim}}=0$ となる $u\in S^{\times,1}$ が存在するかを調べる。
 
-Yang・S-pair により $N_2=H$ 上での共役を確認し、一つ基準共役子
+この段階で新たに $w\in L$ を探索する必要はない。$w$ の自由度は cokernel に吸収されている。
 
-$$
-Q_0
-$$
-
-を得る。
-
-同時に中心化群を
-
-$$
-C(u),\qquad u\in S^{\times,1}
-$$
-
-として記述する。
-
-### Step 2. extended Johnson 成分を計算
+したがって $N_2\to N_3$ に上がっても、外側の探索範囲は依然として
 
 $$
- u_\phi=\tau_1^\theta(\phi),
-\qquad
-u_\psi=\tau_1^\theta(\psi)
+\boxed{S^{\times,1}}
 $$
 
-を計算する。
-
-### Step 3. BBB 型の整数格子条件で正しい lift を作る
-
-$Q_0$ および必要な $C(u)$ に対して、$N_3$ の正しい整数格子 $\mathcal N_\theta$ の保存条件から
-
-$$
-(\nu_{Q_0},Q_0),
-\qquad
-(\nu_{C(u)},C(u))
-$$
-
-を正しく選ぶ。
-
-または $Q(u)=Q_0C(u)$ に対して直接 $\nu_{Q(u)}$ を計算してもよい。
-
-### Step 4. 整数 obstruction を作る
-
-$$
-D(u)
-=
-u_\psi
--Q(u)\cdot u_\phi
--(1-R_\psi\cdot)\nu_{Q(u)}
-\in L
-$$
-
-を計算する。
-
-### Step 5. primitive quotient に落とす
-
-$$
-P_\mathbb Z
-=
-L/(H_\mathbb Z\wedge\omega)
-$$
-
-へ射影し、
-
-$$
-[D(u)]_{\mathrm{prim}}
-\in K_{\mathrm{prim}}(\psi)
-$$
-
-を求める。
-
-実装上は $1-R_\psi\cdot$ の Smith normal form などで cokernel class を判定できる。
-
-### Step 6. $S^{\times,1}$ 内を探索
-
-$$
-[D(u)]_{\mathrm{prim}}=0
-$$
-
-となる $u\in S^{\times,1}$ が存在するかを調べる。
-
-存在すれば $N_3$-共役、存在しなければ $N_3$-非共役である。
+のままである。
 
 ---
 
-## 11. 「正しい lift」を最初に作る恩恵
+## 11. 正しい lift を最初に作る恩恵
 
-ambient space
+ambient space $\frac12L\rtimes Sp(H_\mathbb Z)$ の中で共役方程式を解くだけでは、その解が $\rho_3(\operatorname{Aut}_{\partial}\pi)$ から来る保証がない。
 
-$$
-\frac12L\rtimes Sp(H_\mathbb Z)
-$$
-
-の中で共役方程式を解くだけなら、Johnson part は $\frac12L$ を自由に動けてしまう。
-
-しかし、その解が
-
-$$
-\rho_3(\operatorname{Aut}_{\partial}\pi)
-$$
-
-から来る保証はない。
-
-BBB 型の整数格子条件で正しい lift
+BBB 型の条件で正しい lift
 
 $$
 (\nu_Q,Q)
-\in\rho_3(\operatorname{Aut}_{\partial}\pi)
+\in
+\rho_3(\operatorname{Aut}_{\partial}\pi)
 $$
 
 を一つ選ぶと、残りの許される自由度が
@@ -738,13 +592,13 @@ $$
 
 に正確に限定される。
 
-その結果、
+その結果
 
 $$
 D_Q\in L
 $$
 
-が保証され、さらに lift の変更は
+が保証され、lift の変更は
 
 $$
 D_Q\mapsto D_Q-(1-R_\psi\cdot)w,
@@ -753,15 +607,9 @@ $$
 
 だけになる。
 
-したがって初めて、整数 primitive cokernel class
+したがって初めて、整数 primitive cokernel class $[D_Q]_{\mathrm{prim}}$ が自然かつ well-defined に定義できる。
 
-$$
-[D_Q]_{\mathrm{prim}}
-$$
-
-が自然かつ well-defined に定義できる。
-
-要約すると、
+要約すると
 
 $$
 \boxed{
@@ -798,28 +646,20 @@ $$
 $$
 D_Q
 =
-u_\psi-Q\cdot u_\phi-(1-R_\psi\cdot)\nu_Q
+ u_\psi-Q\cdot u_\phi-(1-R_\psi\cdot)\nu_Q
 \in L
 $$
 
-を作ってから
-
-$$
-[D_Q]_{\mathrm{prim}}
-$$
-
-を取ることである。
+を作ってから $[D_Q]_{\mathrm{prim}}$ を取ることである。
 
 ---
 
-## 13. genus 2 の特別な場合
+## 13. genus 2 の場合
 
 $g=2$ では
 
 $$
-\Lambda^3H_\mathbb Z
-\cong
-H_\mathbb Z
+\Lambda^3H_\mathbb Z\cong H_\mathbb Z
 $$
 
 が $Sp$-equivariant に成り立ち、
@@ -837,13 +677,11 @@ fibered knot の条件 $|f(1)|=1$ のもとでは full cokernel から primitive
 
 $$
 \boxed{
-N_2\text{-共役}
-\Longrightarrow
-N_3\text{-共役}.
+N_2\text{-共役}\Longrightarrow N_3\text{-共役}.
 }
 $$
 
-本格的な $N_3$ obstruction 検査が必要になるのは genus $3$ 以上である。
+本格的な $N_3$ obstruction 検査が必要になるのは genus 3 以上である。
 
 ---
 
@@ -865,24 +703,24 @@ A\in Sp(H_\mathbb Z)
 \nu_A\bmod L
 $$
 
-を直接計算する公式を確定することである。
+を直接計算する公式を確定・実装することである。
 
 これができれば、$N_3$ 共役判定は
 
-1. Yang・S-pair による $N_2$ 共役子と中心化群の計算
-2. extended Johnson 成分の計算
-3. BBB 型の正しい lift の計算
-4. 整数 primitive cokernel class の計算
-5. $S^{\times,1}$ 内の探索
+- Yang・S-pair による $N_2$ 共役子と中心化群の計算
+- extended Johnson 成分の計算
+- BBB 型の正しい lift の計算
+- integer primitive cokernel class の計算
+- $S^{\times,1}$ 内の探索
 
-という完全に機械的な手順になる。
+という機械的手順になる。
 
 ---
 
 ## 参考
 
 - J. S. Birman, T. E. Brendle, N. Broaddus, *Calculating the image of the second Johnson–Morita representation*.
-- D. Johnson, Torelli 群の第一 Johnson 準同型と $\tau_1(\mathcal I_{g,1})=\Lambda^3H_\mathbb Z$.
+- D. Johnson, 第一 Johnson 準同型と $\tau_1(\mathcal I_{g,1})=\Lambda^3H_\mathbb Z$.
 - S. Morita, Johnson 準同型の mapping class group への拡張.
 - `kiyoh.pdf`
 - `simpleness.pdf`
