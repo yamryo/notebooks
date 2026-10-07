@@ -458,53 +458,80 @@ $$
 
 ---
 
-## 11. fibered knot の集合内での原点という問題
+## 11. fibered knot の集合内での原点
 
-代数的には $(R,1)$ は常に存在する。
+この問題は解決した。
 
-一方、
+$f(t)$ が正の次数をもつ monic, irreducible, reciprocal polynomial で
 
-$$
-[R,1]
-$$
+$
+|f(1)|=1
+$
 
-に対応する $Sp_{2g}(\mathbb Z)$-共役類が、実際に $S^3$ の fibered knot の homological monodromy として実現されるかは別問題である。
+を満たすとする。
 
-最近の整理では、Alexander module と Blanchfield pairing を用いることでこの問題を knot-theoretic に翻訳できる可能性が見えている。
+Nakamura により、同じ Alexander polynomial $f$ をもち、unknotting number $1$ の fibered knot $K\subset S^3$ が存在する。
 
-とくに cyclic Alexander module
+Fogel の結果を用いると、この $K$ の Alexander module は cyclic であり、ある generator $g$ について
 
-$$
-\Lambda/(f)\cong R
-$$
+$
+\operatorname{Bl}_K(g,g)
+=
+\pm\frac1{\Delta_K(t)}
+$
 
-をもつ fibered knot の Blanchfield pairing を Yang の第2成分へ翻訳できれば、
+となる。
 
-$$
-(R,1)
-$$
+従って Yang の第1成分は principal class $[R]$ であり、第2成分は norm class として
 
-の realizability を Blanchfield pairing の numerator / norm class の問題として記述できる。
+$
+[1]\quad\text{または}\quad[-1]
+$
 
-ただし、現時点では符号・mirror・$\alpha\leftrightarrow\alpha^{-1}$ の convention を完全に固定した厳密な翻訳を別途確認する必要がある。
+のどちらかになる。
 
-したがって、
+さらに mirror knot の homological monodromyは $A^{-1}$ である。
+Yang の定義から直接計算すると、
 
-$$
+$
+(\mathfrak a,a)
+\longmapsto
+(\widetilde{\mathfrak a},-a)
+$
+
+であり、特に
+
+$
+(R,1)\longleftrightarrow(R,-1).
+$
+
+したがって Nakamura の $K$ とその mirror のどちらか一方は
+
+$
+\boxed{(R,1)}
+$
+
+を実現する。
+
+よって
+
+$
 \boxed{
-(R,1)\text{ は代数的には canonical origin}
+(R,1)\text{ は代数的な canonical origin であるだけでなく、}
 }
-$$
+$
 
-は確定事項であり、
-
-$$
+$
 \boxed{
-(R,1)\text{ が常に fibered-knot realizable か}
+\text{実際に }S^3\text{ の fibered knot の homological monodromy として実現される。}
 }
-$$
+$
 
-は検証課題として分離する。
+詳細は
+
+`研究メモ｜標準原点(R,1)のファイバー結び目実現.md`
+
+を参照。
 
 ---
 
