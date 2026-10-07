@@ -23,7 +23,7 @@ $$
 ここでいう「距離」は数値距離や metric を意味しない。現段階では、
 
 $$
-	ext{基準点からの階層的変位 invariant}
+\text{基準点からの階層的変位 invariant}
 $$
 
 という意味で用いるのが安全である。
@@ -34,16 +34,16 @@ $$
 
 $f(t)$ を次数 $2g$ の separable, irreducible, palindromic monic polynomial とする。
 
-$f$ の根を $alpha$ とし、
+$f$ の根を $\alpha$ とし、
 
 $$
-F=mathbb Q(alpha),qquad R=mathbb Z[alpha]
+F=\mathbb Q(\alpha),\qquad R=\mathbb Z[\alpha]
 $$
 
 とおく。reciprocal involution を
 
 $$
-widetildealpha=alpha^{-1}
+\widetilde{\alpha}=\alpha^{-1}
 $$
 
 で定める。
@@ -51,18 +51,18 @@ $$
 Yang の理論では、$f$ を特性多項式にもつ
 
 $$
-Ain Sp_{2g}(mathbb Z)
+A\in Sp_{2g}(\mathbb Z)
 $$
 
-の $Sp_{2g}(mathbb Z)$-共役類は S-pair
+の $Sp_{2g}(\mathbb Z)$-共役類は S-pair
 
 $$
-(mathfrak a_A,a_A)
+(\mathfrak a_A,a_A)
 $$
 
 の同値類に対応する。
 
-$mathfrak a_A$ は $alpha$-固有ベクトルの座標が生成する fractional $R$-ideal であり、$a_A$ は symplectic form の情報を記録する第2成分である。
+$\mathfrak a_A$ は $\alpha$-固有ベクトルの座標が生成する fractional $R$-ideal であり、$a_A$ は symplectic form の情報を記録する第2成分である。
 
 ---
 
@@ -71,17 +71,17 @@ $mathfrak a_A$ は $alpha$-固有ベクトルの座標が生成する fractional
 Yang の定義では
 
 $$
-oxed{(R,1)in P_f}
+\boxed{(R,1)\in P_f}
 $$
 
 が常に成り立つ。
 
-したがって、固定した $f$ に対する $Sp_{2g}(mathbb Z)$-共役類の集合には、S-pair $(R,1)$ に対応する distinguished class が必ず存在する。
+したがって、固定した $f$ に対する $Sp_{2g}(\mathbb Z)$-共役類の集合には、S-pair $(R,1)$ に対応する distinguished class が必ず存在する。
 
 これを
 
 $$
-oxed{mathcal O_f:=[R,1]}
+\boxed{\mathcal O_f:=[R,1]}
 $$
 
 と書き、標準原点とみなす。
@@ -94,18 +94,12 @@ $$
 (R,s)
 $$
 
-という形で複数存在するが、その中に
-
-$$
-(R,1)
-$$
-
-という canonical な一つがある。
+という形で複数存在するが、その中に $(R,1)$ という canonical な一つがある。
 
 したがって原点は
 
 $$
-oxed{[R,1]}
+\boxed{[R,1]}
 $$
 
 と一意に指定できる。
@@ -115,57 +109,39 @@ $$
 ## 3. $R$ 上にある共役類の複数性
 
 $$
-U:=R^	imes
+U:=R^\times
 $$
 
 とし、
 
 $$
-U^+:={uin U:widetilde u=u},
+U^+:=\{u\in U:\widetilde u=u\},
 $$
 
 $$
-N(U):={uwidetilde u:uin U}
+N(U):=\{u\widetilde u:u\in U\}
 $$
 
 とおく。
 
-第1成分を $R$ に固定した S-pair
+第1成分を $R$ に固定した S-pair $(R,s)$ の同値類は
 
 $$
-(R,s)
-$$
-
-の同値類は
-
-$$
-oxed{U^+/N(U)}
+\boxed{U^+/N(U)}
 $$
 
 で parametrized される。
 
-したがって
-
-$$
-[R,1]
-$$
-
-以外にも
-
-$$
-[R,s]
-$$
-
-が存在しうる。
+したがって $[R,1]$ 以外にも $[R,s]$ が存在しうる。
 
 ここで $R$ が maximal order でない場合には、
 
 $$
-U^+=(R^	imes)^{widetilde{phantom{x}}}
-      =(Rcap F^+)^	imes
+U^+=(R^\times)^{\widetilde{\phantom{x}}}
+=(R\cap F^+)^\times
 $$
 
-であり、一般に $mathcal O_{F^+}^	imes$ と同一視してはいけない。
+であり、一般に $\mathcal O_{F^+}^\times$ と同一視してはいけない。
 
 ---
 
@@ -178,29 +154,23 @@ $$
 第1成分が $R$ である共役類全体
 
 $$
-mathcal Z_R
+\mathcal Z_R
 :=
-{[R,s]:sin U^+}
+\{[R,s]:s\in U^+\}
 $$
 
 を原点集合とみなすことができる。
 
-このとき $mathcal Z_R$ 内部の違い
+このとき $\mathcal Z_R$ 内部の違い $U^+/N(U)$ を無視し、ideal class のずれだけを見ることになる。
 
-$$
-U^+/N(U)
-$$
-
-を無視し、ideal class のずれだけを見ることになる。
-
-これは $GL_{mathbb Z}$ 的な粗い不変量として自然である。
+これは $GL_{\mathbb Z}$ 的な粗い不変量として自然である。
 
 ### 4.2 一点を原点として見る場合
 
-より細かい $Sp_{mathbb Z}$ 情報まで保持するなら、
+より細かい $Sp_{\mathbb Z}$ 情報まで保持するなら、
 
 $$
-oxed{mathcal O_f=[R,1]}
+\boxed{\mathcal O_f=[R,1]}
 $$
 
 だけを原点とする。
@@ -214,14 +184,14 @@ $$
 S-pair
 
 $$
-S_A=(mathfrak a_A,a_A)
+S_A=(\mathfrak a_A,a_A)
 $$
 
 に対して、まず
 
 $$
-oxed{
-delta_{mathrm{ideal}}(A):=[mathfrak a_A]
+\boxed{
+\delta_{\mathrm{ideal}}(A):=[\mathfrak a_A]
 }
 $$
 
@@ -230,21 +200,21 @@ $$
 これは $R$-ideal の同値類であり、原点では
 
 $$
-delta_{mathrm{ideal}}(mathcal O_f)=[R].
+\delta_{\mathrm{ideal}}(\mathcal O_f)=[R].
 $$
 
-この第1段階は、Alexander module / Latimer–MacDuffee の言葉では $GL_{mathbb Z}$-共役情報に対応する。
+この第1段階は、Alexander module / Latimer–MacDuffee の言葉では $GL_{\mathbb Z}$-共役情報に対応する。
 
 すなわち、同じ $f$ をもつ $A,B$ について
 
 $$
-[mathfrak a_A]=[mathfrak a_B]
+[\mathfrak a_A]=[\mathfrak a_B]
 $$
 
 であることは、
 
 $$
-Asim_{GL_{2g}(mathbb Z)}B
+A\sim_{GL_{2g}(\mathbb Z)}B
 $$
 
 に対応する。
@@ -254,15 +224,15 @@ $$
 ## 6. 第2段階：principal stratum 上の symplectic なずれ
 
 $$
-[mathfrak a_A]=[R]
+[\mathfrak a_A]=[R]
 $$
 
 とする。
 
-このとき、ある $cin F^	imes$ を用いて
+このとき、ある $c\in F^\times$ を用いて
 
 $$
-mathfrak a_A=cR
+\mathfrak a_A=cR
 $$
 
 と書ける。
@@ -270,35 +240,34 @@ $$
 そこで
 
 $$
-oxed{
-sigma_A:=rac{a_A}{cwidetilde c}
+\boxed{
+\sigma_A:=\frac{a_A}{c\widetilde c}
 }
 $$
 
 とおく。
 
-S-pair 条件から $sigma_A$ は $U^+$ に入り、$c$ の取り方を
+S-pair 条件から $\sigma_A$ は $U^+$ に入り、$c$ の取り方を
 
 $$
-c'=cu,qquad uin R^	imes
+c'=cu,\qquad u\in R^\times
 $$
 
 と変えると
 
 $$
-sigma_A'
+\sigma_A'
 =
-rac{sigma_A}{uwidetilde u}.
+\frac{\sigma_A}{u\widetilde u}.
 $$
 
 したがって
 
 $$
-oxed{
-delta_{mathrm{Sp}}(A)
+\boxed{
+\delta_{\mathrm{Sp}}(A)
 :=
-[sigma_A]
-in U^+/N(U)
+[\sigma_A]\in U^+/N(U)
 }
 $$
 
@@ -307,17 +276,18 @@ $$
 原点 $(R,1)$ では
 
 $$
-delta_{mathrm{Sp}}(mathcal O_f)=1.
+\delta_{\mathrm{Sp}}(\mathcal O_f)=1.
 $$
 
 従って principal stratum では
 
 $$
-oxed{
-Asim_{Sp_{2g}(mathbb Z)}mathcal O_f
-iff
-delta_{mathrm{ideal}}(A)=[R]
- 	ext{かつ}delta_{mathrm{Sp}}(A)=1.
+\boxed{
+A\sim_{Sp_{2g}(\mathbb Z)}\mathcal O_f
+\iff
+\delta_{\mathrm{ideal}}(A)=[R]
+\ \text{かつ}\
+\delta_{\mathrm{Sp}}(A)=1.
 }
 $$
 
@@ -328,10 +298,10 @@ $$
 以上をまとめると、原点 $(R,1)$ からのずれは
 
 $$
-oxed{
-	ext{ideal のずれ}
-quadlongrightarrowquad
-	ext{symplectic/unit のずれ}
+\boxed{
+\text{ideal のずれ}
+\quad\longrightarrow\quad
+\text{symplectic/unit のずれ}
 }
 $$
 
@@ -340,21 +310,21 @@ $$
 記号的には
 
 $$
-delta(A)
+\delta(A)
 =
-igl(
-delta_{mathrm{ideal}}(A),
-delta_{mathrm{Sp}}(A)
-igr)
+\bigl(
+\delta_{\mathrm{ideal}}(A),
+\delta_{\mathrm{Sp}}(A)
+\bigr)
 $$
 
-と書きたいが、$delta_{mathrm{Sp}}$ は $delta_{mathrm{ideal}}=[R]$ の stratum 上で定義される量である。
+と書きたいが、$\delta_{\mathrm{Sp}}$ は $\delta_{\mathrm{ideal}}=[R]$ の stratum 上で定義される量である。
 
 したがって、現段階では直積値の invariant とみなすより、
 
 $$
-oxed{
-	ext{pointed, stratified invariant}
+\boxed{
+\text{pointed, stratified invariant}
 }
 $$
 
@@ -370,13 +340,13 @@ $R$ が integrally closed の場合、Yang の分類には
 
 $$
 1
-longrightarrow
+\longrightarrow
 U^+/N(U)
-longrightarrow
+\longrightarrow
 P_f
-longrightarrow
+\longrightarrow
 C_0
-longrightarrow
+\longrightarrow
 1
 $$
 
@@ -392,10 +362,10 @@ $$
 したがって
 
 $$
-oxed{
-	ext{ideal-class direction}
+\boxed{
+\text{ideal-class direction}
 +
-	ext{unit/norm direction}
+\text{unit/norm direction}
 }
 $$
 
@@ -420,19 +390,19 @@ $$
 に対して
 
 $$
-Q(c)in Sp_{2g}(mathbb Z)
+Q(c)\in Sp_{2g}(\mathbb Z)
 $$
 
 となる条件を
 
 $$
-mathfrak a_A=cmathfrak a_B
+\mathfrak a_A=c\mathfrak a_B
 $$
 
 と
 
 $$
-a_A=cwidetilde c,a_B
+a_A=c\widetilde c\,a_B
 $$
 
 の二段階に分けた。
@@ -448,16 +418,15 @@ $$
 
 ---
 
-## 10. $R
-eqmathcal O_F$ の場合の三段階化
+## 10. $R\neq\mathcal O_F$ の場合の三段階化
 
 $R$ が maximal order でない場合には、さらに粗い第0段階として
 
 $$
-oxed{
-delta_{max}(A)
+\boxed{
+\delta_{\max}(A)
 :=
-[mathfrak a_Amathcal O_F]
+[\mathfrak a_A\mathcal O_F]
 }
 $$
 
@@ -466,12 +435,12 @@ $$
 すると
 
 $$
-oxed{
-[mathfrak a_Amathcal O_F]
-quadlongrightarrowquad
-[mathfrak a_A]
-quadlongrightarrowquad
-[sigma_A]
+\boxed{
+[\mathfrak a_A\mathcal O_F]
+\quad\longrightarrow\quad
+[\mathfrak a_A]
+\quad\longrightarrow\quad
+[\sigma_A]
 }
 $$
 
@@ -499,14 +468,14 @@ $$
 [R,1]
 $$
 
-に対応する $Sp_{2g}(mathbb Z)$-共役類が、実際に $S^3$ の fibered knot の homological monodromy として実現されるかは別問題である。
+に対応する $Sp_{2g}(\mathbb Z)$-共役類が、実際に $S^3$ の fibered knot の homological monodromy として実現されるかは別問題である。
 
 最近の整理では、Alexander module と Blanchfield pairing を用いることでこの問題を knot-theoretic に翻訳できる可能性が見えている。
 
 とくに cyclic Alexander module
 
 $$
-Lambda/(f)cong R
+\Lambda/(f)\cong R
 $$
 
 をもつ fibered knot の Blanchfield pairing を Yang の第2成分へ翻訳できれば、
@@ -517,21 +486,21 @@ $$
 
 の realizability を Blanchfield pairing の numerator / norm class の問題として記述できる。
 
-ただし、現時点では符号・mirror・$alphaleftrightarrowalpha^{-1}$ の convention を完全に固定した厳密な翻訳を別途確認する必要がある。
+ただし、現時点では符号・mirror・$\alpha\leftrightarrow\alpha^{-1}$ の convention を完全に固定した厳密な翻訳を別途確認する必要がある。
 
 したがって、
 
 $$
-oxed{
-(R,1)	ext{ は代数的には canonical origin}
+\boxed{
+(R,1)\text{ は代数的には canonical origin}
 }
 $$
 
 は確定事項であり、
 
 $$
-oxed{
-(R,1)	ext{ が常に fibered-knot realizable か}
+\boxed{
+(R,1)\text{ が常に fibered-knot realizable か}
 }
 $$
 
@@ -544,18 +513,17 @@ $$
 本研究における使い方を次のように整理する。
 
 - 固定した既約 $f$ に対する標準基準点は $(R,1)$ とする。
-- $[mathfrak a]$ を第1の変位 invariant とする。
+- $[\mathfrak a]$ を第1の変位 invariant とする。
 - principal stratum では $U^+/N(U)$ の class を第2の変位 invariant とする。
-- $R
-eqmathcal O_F$ では maximal-order extension を第0段階として追加できる。
+- $R\neq\mathcal O_F$ では maximal-order extension を第0段階として追加できる。
 - 「距離」という語を使う場合も、当面は metric ではなく階層的変位を意味する。
 - knot-realizable subset の中にも標準原点を取れるかどうかは、Blanchfield pairing との翻訳を通して別途確認する。
 
 この見方により、Yang の S-pair 分類は
 
 $$
-oxed{
-	ext{原点 }(R,1)	ext{ をもつ階層的な共役不変量}
+\boxed{
+\text{原点 }(R,1)\text{ をもつ階層的な共役不変量}
 }
 $$
 
