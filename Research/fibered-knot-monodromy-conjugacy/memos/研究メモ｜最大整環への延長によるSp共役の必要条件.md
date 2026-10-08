@@ -148,13 +148,17 @@ $$
 
 主張は
 
-$\boxed{X_1\sim_{\operatorname{Sp}_{2n}(\mathbb Z)}X_2\quad\Longrightarrow\quad r\in C_{\mathcal O}}$
+$$
+\boxed{X_1\sim_{\operatorname{Sp}_{2n}(\mathbb Z)}X_2\quad\Longrightarrow\quad r\in C_{\mathcal O}}
+$$
 
 である。
 
 したがって、その対偶として
 
-$\boxed{r\notin C_{\mathcal O}\quad\Longrightarrow\quad X_1\not\sim_{\operatorname{Sp}_{2n}(\mathbb Z)}X_2}$
+$$
+\boxed{r\notin C_{\mathcal O}\quad\Longrightarrow\quad X_1\not\sim_{\operatorname{Sp}_{2n}(\mathbb Z)}X_2}
+$$
 
 が得られる。
 
