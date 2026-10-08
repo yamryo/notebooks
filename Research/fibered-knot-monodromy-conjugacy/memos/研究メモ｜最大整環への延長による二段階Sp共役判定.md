@@ -74,13 +74,7 @@ $$
 
 従って、
 
-$$
-\boxed{
-I\text{ が非主イデアル}
-\quad\Longrightarrow\quad
-A\not\sim_{\mathrm{Sp}}B
-}
-$$
+$\boxed{I\text{ が非主イデアル}\quad\Longrightarrow\quad A\not\sim_{\mathrm{Sp}}B}$
 
 を得る。
 
@@ -111,10 +105,7 @@ $$
 
 このとき
 
-$$
-\boxed{
-r:=\frac{1}{c\widetilde c}\frac{s_A}{s_B}}
-$$
+$\boxed{r:=\frac{1}{c\widetilde c}\frac{s_A}{s_B}}$
 
 と定める。
 
@@ -188,12 +179,7 @@ $$
 
 従って、
 
-$$
-\boxed{
-r\notin C_{\mathcal O}
-\quad\Longrightarrow\quad
-A\not\sim_{\mathrm{Sp}}B}
-$$
+$\boxed{r\notin C_{\mathcal O}\quad\Longrightarrow\quad A\not\sim_{\mathrm{Sp}}B}$
 
 を得る。
 
@@ -219,15 +205,7 @@ $$
 
 したがって
 
-$$
-\boxed{
-R=\mathcal O_F
-\quad\Longrightarrow\quad
-r\in C_{\mathcal O}
-\iff
-A\sim_{\mathrm{Sp}}B
-}
-$$
+$\boxed{R=\mathcal O_F\quad\Longrightarrow\quad r\in C_{\mathcal O}\iff A\sim_{\mathrm{Sp}}B}$
 
 ただし、もちろん Obstruction (1) を通過していることを前提とする。
 
@@ -259,14 +237,7 @@ $$
 
 従って
 
-$$
-\boxed{
-R\subsetneq\mathcal O_F
-\quad\Longrightarrow\quad
-I=(c),\ r\in C_{\mathcal O}
-\text{ だけでは共役かどうか不明}
-}
-$$
+$\boxed{R\subsetneq\mathcal O_F\quad\Longrightarrow\quad I=(c),\ r\in C_{\mathcal O}\text{ だけでは共役かどうか不明}}$
 
 である。
 
@@ -334,10 +305,7 @@ $$
 
 とおけば、
 
-$$
-\boxed{
-r=\frac{u_A}{u_B}}
-$$
+$\boxed{r=\frac{u_A}{u_B}}$
 
 となる。
 
@@ -371,9 +339,7 @@ $$
 
 - $I$ が非主イデアル：
 
-  $$
-  \boxed{A\not\sim_{\mathrm{Sp}}B}
-  $$
+  $\boxed{A\not\sim_{\mathrm{Sp}}B}$
 
 - $I=(c)$：Step 2 へ。
 
@@ -393,19 +359,11 @@ $$
 
 - $r\notin C_{\mathcal O}$：
 
-  $$
-  \boxed{A\not\sim_{\mathrm{Sp}}B}
-  $$
+  $\boxed{A\not\sim_{\mathrm{Sp}}B}$
 
 - $r\in C_{\mathcal O}$：
 
-  $$
-  \boxed{
-  \begin{cases}
-  A\sim_{\mathrm{Sp}}B, & R=\mathcal O_F,\\
-  \text{不明}, & R\subsetneq\mathcal O_F.
-  \end{cases}}
-  $$
+  $\boxed{\begin{cases}A\sim_{\mathrm{Sp}}B, & R=\mathcal O_F,\\ \text{不明}, & R\subsetneq\mathcal O_F.\end{cases}}$
 
 ---
 
@@ -413,13 +371,7 @@ $$
 
 この判定法は、Yang の S-pair を最大整環へ粗視化して
 
-$$
-\boxed{
-\text{ideal-class obstruction}
-\longrightarrow
-\text{norm-unit obstruction}
-}
-$$
+$\boxed{\text{ideal-class obstruction}\longrightarrow\text{norm-unit obstruction}}$
 
 の二段階で利用するものである。
 
