@@ -132,11 +132,7 @@ $$
 ### 補題：$Q(c)$ は全ての $\mathbb Q$-共役子を尽くす
 
 $$
-\boxed{
-\{Q\in GL_{2g}(\mathbb Q)\mid B=QAQ^{-1}\}
-=
-\{Q(c)\mid c\in F^\times\}.
-}
+\boxed{ \{Q\in GL_{2g}(\mathbb Q)\mid B=QAQ^{-1}\} = \{Q(c)\mid c\in F^\times\}. }
 $$
 
 実際、$B=QAQ^{-1}$ を満たす $Q\in GL_{2g}(\mathbb Q)$ を任意に取って
@@ -198,15 +194,13 @@ $$
 Yang の S-pair 条件は
 
 $$
-\boxed{\mathfrak a_A=c\mathfrak a_B}
-\tag{I}
+\boxed{\mathfrak a_A=c\mathfrak a_B} \tag{I}
 $$
 
 および
 
 $$
-\boxed{a_A=c\widetilde c\,a_B}
-\tag{II}
+\boxed{a_A=c\widetilde c\,a_B} \tag{II}
 $$
 
 である。
@@ -248,11 +242,7 @@ $$
 よって
 
 $$
-\boxed{
-\mathfrak a_A=c\mathfrak a_B
-\iff
-Q(c)\in GL(2g,\mathbb Z)
-}
+\boxed{ \mathfrak a_A=c\mathfrak a_B \iff Q(c)\in GL(2g,\mathbb Z) }
 $$
 
 となる。
@@ -272,14 +262,7 @@ $$
 したがって
 
 $$
-\boxed{
-Q(c)\in Sp(2g,\mathbb Z)
-\iff
-\begin{cases}
-\mathfrak a_A=c\mathfrak a_B,\\
-a_A=c\widetilde c\,a_B.
-\end{cases}
-}
+\boxed{ Q(c)\in Sp(2g,\mathbb Z) \iff \begin{cases} \mathfrak a_A=c\mathfrak a_B,\\ a_A=c\widetilde c\,a_B. \end{cases} }
 $$
 
 この形にすると、S-pair の二条件はそれぞれ
@@ -453,10 +436,7 @@ $$
 行列の言葉では
 
 $$
-\boxed{
-Q(c_1)=M_BT(c_1)M_A^{-1}
-\stackrel{?}{\in}GL(2g,\mathbb Z)
-}
+\boxed{ Q(c_1)=M_BT(c_1)M_A^{-1} \stackrel{?}{\in}GL(2g,\mathbb Z) }
 $$
 
 を調べることと同じである。
@@ -510,11 +490,7 @@ $$
 調べるべき条件は
 
 $$
-\boxed{
-\exists v\in\mathcal O_F^{\times,1}
-\quad
-\mathfrak a_A=c_0u_0v\,\mathfrak a_B
-}
+\boxed{ \exists v\in\mathcal O_F^{\times,1} \quad \mathfrak a_A=c_0u_0v\,\mathfrak a_B }
 $$
 
 である。
@@ -522,11 +498,7 @@ $$
 行列では
 
 $$
-\boxed{
-\exists v\in\mathcal O_F^{\times,1}
-\quad
-Q(c_0u_0v)\in GL(2g,\mathbb Z)
-}
+\boxed{ \exists v\in\mathcal O_F^{\times,1} \quad Q(c_0u_0v)\in GL(2g,\mathbb Z) }
 $$
 
 となる。
@@ -562,11 +534,7 @@ $$
 一つ $u_0$ が見つかった後は、norm 条件を保つ自由度だけが残るので
 
 $$
-\boxed{
-\mathcal O_F^{\times,1}
-=
-\{v\in\mathcal O_F^\times:v\widetilde v=1\}
-}
+\boxed{ \mathcal O_F^{\times,1} = \{v\in\mathcal O_F^\times:v\widetilde v=1\} }
 $$
 
 の中を探索する。
@@ -574,11 +542,7 @@ $$
 したがって存在判定では
 
 $$
-\boxed{
-\mathcal O_F^\times
-\supset
-\mathcal O_F^{\times,1}
-}
+\boxed{ \mathcal O_F^\times \supset \mathcal O_F^{\times,1} }
 $$
 
 という絞り込みが起こる。
@@ -654,11 +618,7 @@ $$
 として、
 
 $$
-\boxed{
-\{c\in F^\times:Q(c)\in Sp(2g,\mathbb Z)\}
-=
-c_*S^{\times,1}
-}
+\boxed{ \{c\in F^\times:Q(c)\in Sp(2g,\mathbb Z)\} = c_*S^{\times,1} }
 $$
 
 となる。
@@ -666,13 +626,7 @@ $$
 また $S\subseteq\mathcal O_F$ の場合には
 
 $$
-\boxed{
-S^{\times,1}
-\subseteq
-\mathcal O_F^{\times,1}
-\subseteq
-\mathcal O_F^\times
-}
+\boxed{ S^{\times,1} \subseteq \mathcal O_F^{\times,1} \subseteq \mathcal O_F^\times }
 $$
 
 である。
@@ -680,13 +634,7 @@ $$
 したがって、判定から全共役子・中心化群の決定までを通して見ると、調べる unit の自由度は
 
 $$
-\boxed{
-\mathcal O_F^\times
-\supset
-\mathcal O_F^{\times,1}
-\supset
-S^{\times,1}
-}
+\boxed{ \mathcal O_F^\times \supset \mathcal O_F^{\times,1} \supset S^{\times,1} }
 $$
 
 と段階的に狭まっていく。
@@ -700,11 +648,7 @@ $$
 が見つかれば、全共役子は $A,B$ の symplectic centralizer を用いて
 
 $$
-\boxed{
-Z_{Sp(2g,\mathbb Z)}(B)\,Q_*
-=
-Q_*\,Z_{Sp(2g,\mathbb Z)}(A)
-}
+\boxed{ Z_{Sp(2g,\mathbb Z)}(B)\,Q_* = Q_*\,Z_{Sp(2g,\mathbb Z)}(A) }
 $$
 
 と書ける。
@@ -805,10 +749,7 @@ $R\ne\mathcal O_F$ の場合の判定手順を、$Q(c)$ の言葉だけでまと
 Yang の S-pair 判定を
 
 $$
-\boxed{
-\text{候補 }Q(c)=M_BT(c)M_A^{-1}
-\text{ を }Sp(2g,\mathbb Z)\text{ に落とす問題}
-}
+\boxed{ \text{候補 }Q(c)=M_BT(c)M_A^{-1} \text{ を }Sp(2g,\mathbb Z)\text{ に落とす問題} }
 $$
 
 とみなす。
