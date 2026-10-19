@@ -4,7 +4,7 @@
 
 ## 0. このメモの位置づけ
 
-\`simpleness.pdf\` と \`kiyoh.pdf\` に書かれた $N_3$ 上の simpleness 条件を再検討した結果、次の点が重要だと分かった。
+`simpleness.pdf` と `kiyoh.pdf` に書かれた $N_3$ 上の simpleness 条件を再検討した結果、次の点が重要だと分かった。
 
 1. 「simple」を自由ホモトピーで定義する限り、separating simple curve と nonseparating simple curve を分ける必要がある。
 2. $N_3$ の nonseparating-simple 判定では、$\langle l(x),|x|\rangle\in\mathbb Q|x|$ だけでは足りず、少なくとも $|x|$ の primitive 性が必要である。
@@ -17,7 +17,7 @@
 
 ## 1. 定義と Fact 2.1 / 2.2 の注意点
 
-\`simpleness.pdf\` の Definition 2.1 では、$x\in\pi$ が simple であるとは、その自由ホモトピー類が simple closed curve を含むことと定義している。
+`simpleness.pdf` の Definition 2.1 では、$x\in\pi$ が simple であるとは、その自由ホモトピー類が simple closed curve を含むことと定義している。
 
 この定義では separating simple curve も含まれる。たとえば
 
@@ -53,7 +53,7 @@ x=w f(x_1)w^{-1}.
 }
 $$
 
-\`kiyoh.pdf\` の Proposition 3.2 の証明では、内部自己同型によって $x$ を共役な based simple representative に取り替えてから $f(x_1)=x$ としているが、元の $x$ に戻す共役が $\operatorname{Aut}_{\partial}(\pi)$ に属することは示されていない。
+`kiyoh.pdf` の Proposition 3.2 の証明では、内部自己同型によって $x$ を共役な based simple representative に取り替えてから $f(x_1)=x$ としているが、元の $x$ に戻す共役が $\operatorname{Aut}_{\partial}(\pi)$ に属することは示されていない。
 
 したがって、free-homotopy の定義を維持するなら、Fact 2.1(ii) と Fact 2.2 は「共役まで含めた orbit」として書き直すのが安全である。
 
@@ -215,7 +215,7 @@ $$
 
 ## 5. primitive 条件は不可欠
 
-\`simpleness.pdf\` の Theorem 2.4 は
+`simpleness.pdf` の Theorem 2.4 は
 
 $$
 [x]_3\text{ simple}
@@ -592,7 +592,7 @@ $$
 
 重要な点は以下。
 
-- \`simpleness.pdf\` の Theorem 2.4 は **primitive 条件が抜けている**。
+- `simpleness.pdf` の Theorem 2.4 は **primitive 条件が抜けている**。
 - $x_1^2$ がそのまま反例になる。
 - 一方、primitive 条件を加えれば、$\mathbb Q|x|$ という条件は弱すぎず、half-odd-integral condition を自動的に含む。
 - free-homotopy の simple を扱うなら、Fact 2.1 / 2.2 では based representative の **共役の自由度**を落としてはいけない。
@@ -626,7 +626,7 @@ $$
 
 ## 参照した手元資料
 
-- \`simpleness.pdf\`
-- \`kiyoh.pdf\`
+- `simpleness.pdf`
+- `kiyoh.pdf`
 - Johnson の第一 Johnson 準同型の全射性
 - Morita / Kawazumi–Kuno による extended Johnson / symplectic expansion の枠組み
